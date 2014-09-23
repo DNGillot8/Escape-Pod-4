@@ -5,6 +5,7 @@ using namespace std;
 
 class cardLocation{
 public:
+	bool isValidMove() // so that all classes have access to this function
 private:
 	vector<Card> cards;
 };
@@ -15,10 +16,14 @@ public:
 	Card getBottom();
 };
 
-class Hand: public cardLocation{
+
+class Player: public cardLocation{
 public:
+	void showHand();
+	void place(Card crd, Column clmn); // places a card on a column
+	void place(Column clmn1, Column clmn2); // places a column on another column
 private:
-	vector<Card> cardsInHand;
+	vector<Card> hand; // do we need this if Player inherits cards vector from cardLocation?
 };
 
 class Board{
