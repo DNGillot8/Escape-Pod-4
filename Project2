@@ -9,3 +9,14 @@ public:
 private:
 	vector<Card> hand;
 };
+
+class Column {
+public:
+	//void checkIfValid(); //make sure alternating colors, might not be needed
+	Card getTop(); //returns the top card of the column
+	Card getBottom(); //returns the bottom card of the column
+	void moveColumn();
+private:
+	Card cardList[13];
+	Card individualCard; //Maybe?????
+};
