@@ -3,27 +3,22 @@
 #include <vector>
 using namespace std;
 
-class cardLocation{
-public:
-	bool isValidMove() // so that all classes have access to this function
-private:
-	vector<Card> cards;
-};
 
-class Column: public cardLocation{
+
+class Column{
 public:
 	Card getTop();
 	Card getBottom();
 };
 
 
-class Player: public cardLocation{
+class Player{
 public:
 	void showHand();
 	void place(Card crd, Column clmn); // places a card on a column
 	void place(Column clmn1, Column clmn2); // places a column on another column
 private:
-	// vector<Card> hand; // we don't really need this
+	vector<Card> hand; 
 };
 
 class Board{
