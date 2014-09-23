@@ -1,3 +1,11 @@
 /*
 Project Name: Kings in the Corner
 */
+
+//from Wesley
+class Player {
+public:
+	void showHand(vector <Player>playersHand);
+private:
+	vector<Card> hand;
+};
