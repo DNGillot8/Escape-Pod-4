@@ -1,0 +1,60 @@
+switch(c.getSuit)
+       case spades:
+       s = "♠";
+       return;
+
+       case clubs:
+       s = "♣";
+       return;
+
+       case hearts:
+       s = "♥";
+       return;
+
+       case diamonds:
+       s = "♦";
+       return;
+
+       
+       switch(c.getValue)
+       {
+              case ace:
+                     cout << "  _____ \n |     | \n |     | \n | 1 s | \n |     | \n |_____| \n";
+                     return;
+              case deuce:
+                     cout << "  _____ \n |     | \n |     | \n | 2 s | \n |     | \n |_____| \n";
+                     return;
+              case trey:
+                     cout << "  _____ \n |     | \n |     | \n | 3 s | \n |     | \n |_____| \n";
+                     return;
+              case four:
+                     cout << "  _____ \n |     | \n |     | \n | 4 s | \n |     | \n |_____| \n";
+                     return;
+              case five:
+                     cout << "  _____ \n |     | \n |     | \n | 5 s | \n |     | \n |_____| \n";
+                     return;
+              case six:
+                     cout << "  _____ \n |     | \n |     | \n | 6 s | \n |     | \n |_____| \n";
+                     return;
+              case seven:
+                     cout << "  _____ \n |     | \n |     | \n | 7 s | \n |     | \n |_____| \n";
+                     return;
+              case eight:
+                     cout << "  _____ \n |     | \n |     | \n | 8 s | \n |     | \n |_____| \n";
+                     return;
+              case nine:
+                     cout << "  _____ \n |     | \n |     | \n | 9 s | \n |     | \n |_____| \n";
+                     return;
+              case ten:
+                     cout << "  _____ \n |     | \n |     | \n | 10s | \n |     | \n |_____| \n";
+                     return;
+              case jack:
+                     cout << "  _____ \n |     | \n |     | \n | j s | \n |     | \n |_____| \n";
+                     return;
+              case queen:
+                     cout << "  _____ \n |     | \n |     | \n | q s | \n |     | \n |_____| \n";
+                     return;
+              case king:
+                     cout << "  _____ \n |     | \n |     | \n | k s | \n |     | \n |_____| \n";
+                     return;
+              default:;
