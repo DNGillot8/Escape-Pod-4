@@ -1,0 +1,132 @@
+#include "Card.h"
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class cardLocation{
+public:
+private:
+	vector<Card> cards;
+};
+
+class Column: public cardLocation{
+public:
+	Card getTop();
+	Card getBottom();
+};
+
+class Board{
+public:
+	Column columns[8];
+	void clearColumn(int id); // Valid IDs are 0-8, in order of the above
+};
+
+/*void drawRow(int rowNum, char topSuit, int topValue, char bottomSuit, int bottomValue){
+	string line="+----+----+----+";
+	if(rowNum==0||rowNum%4==0){
+		cout<<line;
+	}
+	else if(rowNum%1==0){
+
+	}
+	else if(rowNum%2==0){
+	}
+	else if(rowNum%3==0){
+	}
+}
+*/
+
+void drawBoard(Board b){
+	const int n=8; // number of columns
+	char topSuit[n], bottomSuit[n]; //arrays of suit and value info;
+	char topValue[n], bottomValue[n];//  used for board drawing
+	bool oneCard[n], noCard[n];
+
+	string line="+----+----+----+";
+	
+
+	for(int i=0; i<n; i++){ //loop through columns gathering info
+		topSuit[i]=b.columns[i].getTop().getSuit();
+		topValue[i]=b.columns[i].getTop().getValue();
+		bottomSuit[i]=b.columns[i].getBottom().getSuit();
+		bottomValue[i]=b.columns[i].getBottom().getValue();
+		oneCard[n]=(topSuit[i]==bottomSuit[i] && topValue[i]==bottomValue[i]);
+		noCard[n]=0;//CHANGE THIS**********
+	}
+
+	cout<<line;//row 0
+
+	for(int i=0; i<3; i++){ //row 1
+		if(!oneCard[i]){
+			cout<<"| "<<bottomValue[i]<<bottomSuit[i]<<" ";
+		}
+		else cout<<"|    ";
+	}
+	cout<<"|\n";
+
+
+
+	for(int i=0; i<3; i++){ //row 2
+		if(oneCard[i]){
+			cout<<"| "<<bottomValue[i]<<bottomSuit[i]<<" ";
+		}
+		else cout<<"| // ";
+	}
+	cout<<"|\n";
+
+
+
+	for(int i=0; i<3; i++){ //row 3
+		if(!oneCard[i]){
+			cout<<"| "<<topValue[i]<<topSuit[i]<<" ";
+		}
+		else cout<<"| // ";
+	}
+	cout<<"|\n";
+
+
+
+	cout<<line;//row 4
+
+	//draw middle
+
+	cout<<line;//row 8;
+
+
+
+	for(int i=5; i<8; i++){ //row 9
+		if(!oneCard[i]){
+			cout<<"| "<<bottomValue[i]<<bottomSuit[i]<<" ";
+		}
+		else cout<<"|    ";
+	}
+	cout<<"|\n";
+
+
+
+	for(int i=5; i<8; i++){ //row 10
+		if(oneCard[i]){
+			cout<<"| "<<bottomValue[i]<<bottomSuit[i]<<" ";
+		}
+		else cout<<"| // ";
+	}
+	cout<<"|\n";
+
+
+
+	for(int i=5; i<8; i++){ //row 11
+		if(!oneCard[i]){
+			cout<<"| "<<topValue[i]<<topSuit[i]<<" ";
+		}
+		else cout<<"|    ";
+	}
+	cout<<"|\n";
+
+
+
+	cout<<line;//row 12
+	}
+
+
+	
+
