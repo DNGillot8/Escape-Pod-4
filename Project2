@@ -34,7 +34,6 @@ public:
 	void shuffle();
 	int size() const;
 	void clear();
-	void moveColumn();//????????
 private:
 	vector<Card> cards;
 };
@@ -73,6 +72,7 @@ void Column::clear() {
 	cards.clear;
 }
 
+//if this isn't here it needs to be where the deck is
 void Column::shuffle() {
 	random_shuffle(cards.begin(), cards.end());
 }
@@ -81,9 +81,6 @@ int Column::size() const {
 	return cards.size();
 }
 
-void Column::moveColumn() {
-
-}
 
 class Player {
 public:
