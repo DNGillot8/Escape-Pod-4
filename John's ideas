@@ -1,0 +1,36 @@
+#include "Card.h"
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class cardLocation{
+public:
+private:
+	vector<Card> cards;
+};
+
+class Column: public cardLocation{
+public:
+	Card getTop();
+	Card getBottom();
+};
+
+class Hand: public cardLocation{
+public:
+private:
+	vector<Card> cardsInHand;
+};
+
+class Board{
+public:
+private:
+	Column upperLeft, upperRight, lowerLeft, lowerRight;
+	Column top, left, right, bottom;
+	void clearColumn(int id); // Valid IDs are 0-8, in order of the above
+};
+
+class Game{
+public:
+private:
+
+};
