@@ -82,7 +82,6 @@ int Column::size() const {
 }
 
 
-<<<<<<< HEAD
 class Player {
 public:
 	void showHand();
@@ -109,12 +108,6 @@ void Player::place(Column clmn1, Column clmn2) {
 }
 
 
-int main()
-{
-	//srand(time(0));
-	Player p;
-	p.showHand();
-=======
 
 int playerCount(){
 	do{
@@ -154,12 +147,11 @@ int main()
 			break;
 	}
 	
->>>>>>> origin/master
 	return 0;
 }
 
 
-/*int gameLoop(int realPlayers){
+int gameLoop(int realPlayers){
 	switch (realPlayers){
 	case 1:
 		realPlayer p1;
@@ -185,7 +177,7 @@ int main()
 	}
 	return victory; //eventually, return winner's name
 	
-}*/
+}
 
 
 
