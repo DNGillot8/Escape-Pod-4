@@ -158,7 +158,7 @@ int playerCount(){
 		int count=0;
 		cout<<"How many human players want to play (1-4)?\n";
 		cin>>count;
-	} while (count<1&&count>4);
+	} while (count<=1&&count>=4);
 	return count;
 }
 
