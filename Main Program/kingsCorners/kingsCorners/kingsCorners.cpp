@@ -161,22 +161,22 @@ void drawBoard(Column c1, Column c2, Column c3, Column c4, Column c5, Column c6,
 
 	cout<<"4----5----6----+";
 
-	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
+	if(c4.size()>1) cout<<"| "<<c4.getBottom().getValue()<<c4.getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 	cout<<"| ]< |";
-	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
+	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 
-	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
+	if(c4.size()>1) cout<<"| "<<c4.getBottom().getValue()<<c4.getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 	cout<<"|() T|";
-	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-
 	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
 	else cout<<"|    ";
+
+	if(c4.size()>1) cout<<"| "<<c4.getBottom().getValue()<<c4.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
 	cout<<"| 'C |";
-	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
+	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 
 	cout<<"7----8----9----+";
