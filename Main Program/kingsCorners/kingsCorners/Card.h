@@ -14,7 +14,7 @@
 using std::string;
 
 enum Suit {clubs, diamonds, hearts, spades};
-enum Value {deuce, trey, four, five, six, seven, eight, nine, ten, jack, king, queen, ace};
+enum Value {ace, deuce, trey, four, five, six, seven, eight, nine, ten, jack, queen, king};
 
 class Card {
 public:
