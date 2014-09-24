@@ -20,6 +20,11 @@ using std::rand;
 using std::srand;
 
 
+class Board{
+public:
+	Column columns[8];
+	Column deck;
+};
 
 class Column {
 public:
@@ -114,8 +119,8 @@ bool areDifferentColors(Card c1, Card c2){
 	return 0;// this needs to be written
 }
 
-bool isValidMove(Card source, Card dest){
-	if ((dest.getValue()-source.getValue()==1)&&(areDifferentColors(source,dest))){
+bool isValidMove(Card source, Column dest){
+	if ((dest.getTop().getValue()-source.getValue()==1)&&(areDifferentColors(source,dest.getTop()))){
 		return 1; // if source is 1 less than dest and they are not the same suit
 	}
 	return 0;
@@ -135,72 +140,72 @@ int playerCount(){
 	return count;
 }
 
-void drawBoard(Column c1, Column c2, Column c3, Column c4, Column c5, Column c6, Column c7, Column c8){
+void drawBoard(Board b){
 	cout<<"1----2----3----+";
 
-	if(c1.size()>1) cout<<"| "<<c1.getBottom().getValue()<<c1.getBottom().getSuit()<<" ";
+	if(b.columns[1].size()>1) cout<<"| "<<b.columns[1].getBottom().getValue()<<b.columns[1].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
-	if(c2.size()>1) cout<<"| "<<c2.getBottom().getValue()<<c2.getBottom().getSuit()<<" ";
+	if(b.columns[2].size()>1) cout<<"| "<<b.columns[2].getBottom().getValue()<<b.columns[2].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
-	if(c3.size()>1) cout<<"| "<<c3.getBottom().getValue()<<c3.getBottom().getSuit()<<" |";
-	else cout<<"|    ";
+	if(b.columns[3].size()>1) cout<<"| "<<b.columns[3].getBottom().getValue()<<b.columns[3].getBottom().getSuit()<<" |\n";
+	else cout<<"|    |";
 
-	if(c1.size()==1) cout<<"| "<<c1.getTop().getValue()<<c1.getTop().getSuit()<<" ";
+	if(b.columns[1].size()==1) cout<<"| "<<b.columns[1].getTop().getValue()<<b.columns[1].getTop().getSuit()<<" ";
 	else cout<<"| // ";
-	if(c2.size()==1) cout<<"| "<<c2.getTop().getValue()<<c2.getTop().getSuit()<<" ";
+	if(b.columns[2].size()==1) cout<<"| "<<b.columns[2].getTop().getValue()<<b.columns[2].getTop().getSuit()<<" ";
 	else cout<<"| // ";
-	if(c3.size()==1) cout<<"| "<<c3.getTop().getValue()<<c3.getTop().getSuit()<<" |";
+	if(b.columns[3].size()==1) cout<<"| "<<b.columns[3].getTop().getValue()<<b.columns[3].getTop().getSuit()<<" |\n";
+	else cout<<"| // |";
+
+	if(b.columns[1].size()>1) cout<<"| "<<b.columns[1].getTop().getValue()<<b.columns[1].getTop().getSuit()<<" ";
+	else cout<<"|    ";
+	if(b.columns[2].size()>1) cout<<"| "<<b.columns[2].getTop().getValue()<<b.columns[2].getTop().getSuit()<<" ";
+	else cout<<"|    ";
+	if(b.columns[3].size()>1) cout<<"| "<<b.columns[3].getTop().getValue()<<b.columns[3].getTop().getSuit()<<" |\n";
+	else cout<<"|    |";
+
+	cout<<"4----+----5----+";
+
+	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	cout<<"| ]< ";
+	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
+	else cout<<"|    |";
+
+	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	cout<<"|() T";
+	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
+	else cout<<"|    |";
+
+	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	cout<<"| 'C ";
+	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
+	else cout<<"|    |";
+
+	cout<<"6----7----8----+";
+
+	if(b.columns[6].size()>1) cout<<"| "<<b.columns[6].getBottom().getValue()<<b.columns[6].getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	if(b.columns[7].size()>1) cout<<"| "<<b.columns[7].getBottom().getValue()<<b.columns[7].getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	if(b.columns[8].size()>1) cout<<"| "<<b.columns[8].getBottom().getValue()<<b.columns[8].getBottom().getSuit()<<" |\n";
+	else cout<<"|    |\n";
+
+	if(b.columns[6].size()==1) cout<<"| "<<b.columns[6].getTop().getValue()<<b.columns[6].getTop().getSuit()<<" ";
 	else cout<<"| // ";
-
-	if(c1.size()>1) cout<<"| "<<c1.getTop().getValue()<<c1.getTop().getSuit()<<" ";
-	else cout<<"|    ";
-	if(c2.size()>1) cout<<"| "<<c2.getTop().getValue()<<c2.getTop().getSuit()<<" ";
-	else cout<<"|    ";
-	if(c3.size()>1) cout<<"| "<<c3.getTop().getValue()<<c3.getTop().getSuit()<<" |";
-	else cout<<"|    ";
-
-	cout<<"4----5----6----+";
-
-	if(c4.size()>1) cout<<"| "<<c4.getBottom().getValue()<<c4.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-	cout<<"| ]< |";
-	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-
-	if(c4.size()>1) cout<<"| "<<c4.getBottom().getValue()<<c4.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-	cout<<"|() T|";
-	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-
-	if(c4.size()>1) cout<<"| "<<c4.getBottom().getValue()<<c4.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-	cout<<"| 'C |";
-	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-
-	cout<<"7----8----9----+";
-
-	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-	if(c7.size()>1) cout<<"| "<<c7.getBottom().getValue()<<c7.getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-	if(c8.size()>1) cout<<"| "<<c8.getBottom().getValue()<<c8.getBottom().getSuit()<<" |";
-	else cout<<"|    ";
-
-	if(c6.size()==1) cout<<"| "<<c6.getTop().getValue()<<c6.getTop().getSuit()<<" ";
+	if(b.columns[7].size()==1) cout<<"| "<<b.columns[7].getTop().getValue()<<b.columns[7].getTop().getSuit()<<" ";
 	else cout<<"| // ";
-	if(c7.size()==1) cout<<"| "<<c7.getTop().getValue()<<c7.getTop().getSuit()<<" ";
-	else cout<<"| // ";
-	if(c8.size()==1) cout<<"| "<<c8.getTop().getValue()<<c8.getTop().getSuit()<<" |";
-	else cout<<"| // ";
+	if(b.columns[8].size()==1) cout<<"| "<<b.columns[8].getTop().getValue()<<b.columns[8].getTop().getSuit()<<" |\n";
+	else cout<<"| // |\n";
 
-	if(c6.size()>1) cout<<"| "<<c6.getTop().getValue()<<c6.getTop().getSuit()<<" ";
+	if(b.columns[6].size()>1) cout<<"| "<<b.columns[6].getTop().getValue()<<b.columns[6].getTop().getSuit()<<" ";
 	else cout<<"|    ";
-	if(c7.size()>1) cout<<"| "<<c7.getTop().getValue()<<c7.getTop().getSuit()<<" ";
+	if(b.columns[7].size()>1) cout<<"| "<<b.columns[7].getTop().getValue()<<b.columns[7].getTop().getSuit()<<" ";
 	else cout<<"|    ";
-	if(c8.size()>1) cout<<"| "<<c8.getTop().getValue()<<c8.getTop().getSuit()<<" |";
-	else cout<<"|    ";
+	if(b.columns[8].size()>1) cout<<"| "<<b.columns[8].getTop().getValue()<<b.columns[8].getTop().getSuit()<<" |\n";
+	else cout<<"|    |\n";
 
 	cout<<"+----+----+----+";
 }
@@ -263,16 +268,27 @@ void Player::draw(Column deck)
 
 class aiPlayer: public Player{
 public:
+	//void takeTurn(); //try and eventually implement this
 	void actionsLoop();
+	void findValidLocations(Card source);
 private:
 };
 
 void aiPlayer::actionsLoop(){
+	//draw
+	//while there are valid plays
+	
+
+}
+
+void aiPlayer::findValidLocations(Card source){
+	if(isValidMove(source,
 }
 
 
 class realPlayer: public Player{
 public:
+	//void takeTurn(); //try and eventually implement this
 	void actionsLoop();
 	int displayMenu();
 private:
@@ -317,10 +333,8 @@ int main()
 	while(mode!=3){
 		mode=mainMenu();
 		system("cls");
-
 		switch (mode){
 		case 1:
-			int players=playerCount;
 			int victory=gameLoop();
 			system("cls");
 			reportWinner(victory);
@@ -334,9 +348,9 @@ int main()
 	}
 }
 
-//game loop ideas
 
-int gameLoop(){/*
+
+int gameLoop(){/*   //game loop ideas
 	switch (realPlayers){
 	case 1:
 		realPlayer p1;
@@ -360,12 +374,11 @@ int gameLoop(){/*
 				//player 1 turn
 			int playerChoice;
 			cout << "It is your turn, what would you like to do?" << endl;
-			cout << "1. draw card" << endl <<
-					"2. place card" << endl <<
-					"3. move column" << endl <<
-					"4. show hand" << endl <<
-					"5. show board" << endl <<
-					"6. end turn" << endl;
+			cout << "1. place card" << endl <<
+					"2. move column" << endl <<
+					"3. show hand" << endl <<
+					"4. show board" << endl <<
+					"5. end turn" << endl;
 			cin>>playerChoice;
 
 			switch (playerChoice) {
