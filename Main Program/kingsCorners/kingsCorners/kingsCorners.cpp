@@ -181,7 +181,7 @@ int main()
 
 		switch (mode){
 		case 1:
-			int players=playerCount;
+			int players=playerCount();
 			victory=gameLoop(players);
 			system("cls");
 			reportWinner(victory);
@@ -215,7 +215,43 @@ int gameLoop(int realPlayers){
 	}
 
 	int victory=0;
+	int playerChoice = 0;
 	while(!victory){
+		//player 1 turn
+		for (int i = 1; i <= realPlayers, i++)
+		{
+			cout << "player " << i << "it is your turn, what would you like to do?" << endl;
+			cout << "1. draw card" << endl <<
+					"2. place card" << endl <<
+					"3. move column" << endl <<
+					"4. show hand" << endl <<
+					"5. show board" << endl <<
+					"6. end turn" << endl;
+
+			switch (playerChoice) {
+				case 1
+					//create and then drawCard() in player class
+				case 2
+					int card = 0;
+					int location = 0;
+					cout << "enter the card and the place to move it to: card column" << endl;
+					cin>>card;
+					cin>>location;
+					//call place(card,location) in player class
+				case 3
+					int column1;
+					int column2;
+					cout << "enter the column's location and the columns new location, column column" << endl;
+					cin>>column1;
+					cin>>column2;
+					//call moveColumn(column1, column2) in player class
+				case 4
+					//call showhand() function in player class
+				case 5
+					//not sure how to flash the board
+				case 6
+					//break
+		}
 		//take player turns
 		//on win, set victory to number of victorious player
 	}
