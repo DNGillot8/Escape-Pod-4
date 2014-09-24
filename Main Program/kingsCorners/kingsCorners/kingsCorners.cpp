@@ -82,6 +82,7 @@ int Column::size() const {
 }
 
 
+<<<<<<< HEAD
 class Player {
 public:
 	void showHand();
@@ -113,6 +114,79 @@ int main()
 	//srand(time(0));
 	Player p;
 	p.showHand();
+=======
+
+int playerCount(){
+	do{
+		int count=0;
+		cout<<"How many human players want to play (1-4)?\n";
+		cin<<count;
+	} while (count<1&&count>4);
+	return count;
+}
+
+void reportWinner(int winner){
+	cout<<"Player"<<winner<<"is the winner!!!";
+}
+
+void displayRules(){
+	//display the rules
+}
+
+int main()
+{
+	srand(time(0));
+
+	int mode=0;
+	while(mode!=3){
+		mode=mainMenu();
+		system("cls");
+
+		switch (mode){
+		case 1:
+			int players=playerCount;
+			victory=gameLoop(players);
+			system("cls");
+			reportWinner(victory);
+			break;
+		case 2:
+			displayRules();
+			break;
+	}
+	
+>>>>>>> origin/master
 	return 0;
 }
+
+
+/*int gameLoop(int realPlayers){
+	switch (realPlayers){
+	case 1:
+		realPlayer p1;
+		aiPlayer p2, p3, p4;
+		break;
+	case 2:
+		realPlayer p1, p2;
+		aiPlayer p3, p4;
+		break;
+	case 3:
+		realPlayer p1, p2, p3;
+		aiPlayer p4;
+		break;
+	case 4:
+		realPlayer p1, p2, p3, p4;
+		break;
+	}
+
+	int victory=0;
+	while(!victory){
+		//take player turns
+		//on win, set victory to number of victorious player
+	}
+	return victory; //eventually, return winner's name
+	
+}*/
+
+
+
 

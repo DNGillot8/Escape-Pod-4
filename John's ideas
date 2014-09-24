@@ -3,27 +3,23 @@
 #include <vector>
 using namespace std;
 
-class cardLocation{
-public:
-	bool isValidMove() // so that all classes have access to this function
-private:
-	vector<Card> cards;
-};
 
-class Column: public cardLocation{
+
+class Column{
 public:
 	Card getTop();
 	Card getBottom();
 };
 
 
-class Player: public cardLocation{
+class Player{
 public:
+	void generateHand();
 	void showHand();
 	void place(Card crd, Column clmn); // places a card on a column
 	void place(Column clmn1, Column clmn2); // places a column on another column
 private:
-	vector<Card> hand; // do we need this if Player inherits cards vector from cardLocation?
+	vector<Card> hand; 
 };
 
 class Board{
@@ -39,3 +35,10 @@ public:
 private:
 
 };
+
+void Player::showHand() // start of showHand function
+{
+	
+	for (int i=0; i<hand.size(); i++)
+		cout<<hand.at(i).getValue()<<" of "<<hand.at(i).getSuit()<<endl;
+}
