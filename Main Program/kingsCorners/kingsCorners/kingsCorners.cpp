@@ -81,6 +81,7 @@ int Column::size() const {
 	return cards.size();
 }
 
+
 /*
 class Player {
 public:
@@ -108,13 +109,110 @@ void Player::place(Column clmn1, Column clmn2) {
 }
 */
 
+
+bool areDifferentColors(Card c1, Card c2){
+	return 0;// this needs to be written
+}
+
 bool isValidMove(Card source, Card dest){
-	return 0;// if source is 1 less than dest and they are not the same suit
+	if ((dest.getValue()-source.getValue()==1)&&(areDifferentColors(source,dest))){
+		return 1; // if source is 1 less than dest and they are not the same suit
+	}
+	return 0;
 }
 
 bool isValidMove(Column source, Column dest){
 	return isValidMove(source.getTop(), dest.getBottom());
 }
+
+
+int playerCount(){
+	int count=0;
+	do{
+		cout<<"How many human players want to play (1-4)?\n";
+		cin>>count;
+	} while (count<=1&&count>=4);
+	return count;
+}
+
+void drawBoard(Column c1, Column c2, Column c3, Column c4, Column c5, Column c6, Column c7, Column c8){
+	cout<<"1----2----3----+";
+
+	if(c1.size()>1) cout<<"| "<<c1.getBottom().getValue()<<c1.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c2.size()>1) cout<<"| "<<c2.getBottom().getValue()<<c2.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c3.size()>1) cout<<"| "<<c3.getBottom().getValue()<<c3.getBottom().getSuit()<<" |";
+	else cout<<"|    ";
+
+	if(c1.size()==1) cout<<"| "<<c1.getTop().getValue()<<c1.getTop().getSuit()<<" ";
+	else cout<<"| // ";
+	if(c2.size()==1) cout<<"| "<<c2.getTop().getValue()<<c2.getTop().getSuit()<<" ";
+	else cout<<"| // ";
+	if(c3.size()==1) cout<<"| "<<c3.getTop().getValue()<<c3.getTop().getSuit()<<" |";
+	else cout<<"| // ";
+
+	if(c1.size()>1) cout<<"| "<<c1.getTop().getValue()<<c1.getTop().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c2.size()>1) cout<<"| "<<c2.getTop().getValue()<<c2.getTop().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c3.size()>1) cout<<"| "<<c3.getTop().getValue()<<c3.getTop().getSuit()<<" |";
+	else cout<<"|    ";
+
+	cout<<"4----5----6----+";
+
+	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	cout<<"| ]< |";
+	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+
+	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	cout<<"|() T|";
+	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+
+	if(c5.size()>1) cout<<"| "<<c5.getBottom().getValue()<<c5.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	cout<<"| 'C |";
+	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+
+	cout<<"7----8----9----+";
+
+	if(c6.size()>1) cout<<"| "<<c6.getBottom().getValue()<<c6.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c7.size()>1) cout<<"| "<<c7.getBottom().getValue()<<c7.getBottom().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c8.size()>1) cout<<"| "<<c8.getBottom().getValue()<<c8.getBottom().getSuit()<<" |";
+	else cout<<"|    ";
+
+	if(c6.size()==1) cout<<"| "<<c6.getTop().getValue()<<c6.getTop().getSuit()<<" ";
+	else cout<<"| // ";
+	if(c7.size()==1) cout<<"| "<<c7.getTop().getValue()<<c7.getTop().getSuit()<<" ";
+	else cout<<"| // ";
+	if(c8.size()==1) cout<<"| "<<c8.getTop().getValue()<<c8.getTop().getSuit()<<" |";
+	else cout<<"| // ";
+
+	if(c6.size()>1) cout<<"| "<<c6.getTop().getValue()<<c6.getTop().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c7.size()>1) cout<<"| "<<c7.getTop().getValue()<<c7.getTop().getSuit()<<" ";
+	else cout<<"|    ";
+	if(c8.size()>1) cout<<"| "<<c8.getTop().getValue()<<c8.getTop().getSuit()<<" |";
+	else cout<<"|    ";
+
+	cout<<"+----+----+----+";
+}
+
+void reportWinner(int winner){
+	cout<<"Player"<<winner<<"is the winner!!!";
+}
+
+void displayRules(){
+	cout<<"PUT RULES HERE\n";
+}
+
 
 
 class Player{
@@ -163,17 +261,6 @@ void Player::draw(Column deck)
 }
 
 
-
-int playerCount(){
-	int count=0;
-	do{
-		cout<<"How many human players want to play (1-4)?\n";
-		cin>>count;
-	} while (count<=1&&count>=4);
-	return count;
-}
-
-
 class aiPlayer: public Player{
 public:
 	void actionsLoop();
@@ -182,6 +269,7 @@ private:
 
 void aiPlayer::actionsLoop(){
 }
+
 
 class realPlayer: public Player{
 public:
@@ -194,10 +282,14 @@ void realPlayer::actionsLoop(){
 	int choice=displayMenu();
 	while(choice!=3){
 		if(choice==1){
-
-		}
+			Card source=chooseFromCardsInHand();//menu
+			Card dest=chooseLocation();//menu
+			if(isValidMove(source, dest)){
+				
+			}
 		else{
 
+			}
 		}
 	}
 }
@@ -217,17 +309,6 @@ int realPlayer::displayMenu(){
 		return choice;
 }
 
-
-
-
-void reportWinner(int winner){
-	cout<<"Player"<<winner<<"is the winner!!!";
-}
-
-void displayRules(){
-	cout<<"PUT RULES HERE\n";
-}
-
 int main()
 {
 	srand(time(0));
@@ -239,8 +320,8 @@ int main()
 
 		switch (mode){
 		case 1:
-			int players=playerCount();
-			victory=gameLoop(players);
+			int players=playerCount;
+			int victory=gameLoop(players);
 			system("cls");
 			reportWinner(victory);
 			break;
@@ -252,7 +333,6 @@ int main()
 	return 0;
 	}
 }
-
 
 //game loop ideas
 /*
@@ -276,52 +356,11 @@ int gameLoop(int realPlayers){
 	}
 
 	int victory=0;
-	int playerChoice = 0;
 	while(!victory){
-<<<<<<< HEAD
-		//player 1 turn
-		for (int i = 1; i <= realPlayers, i++)
-		{
-			cout << "player " << i << "it is your turn, what would you like to do?" << endl;
-			cout << "1. draw card" << endl <<
-					"2. place card" << endl <<
-					"3. move column" << endl <<
-					"4. show hand" << endl <<
-					"5. show board" << endl <<
-					"6. end turn" << endl;
-
-			switch (playerChoice) {
-				case 1
-					//create and then drawCard() in player class
-				case 2
-					int card = 0;
-					int location = 0;
-					cout << "enter the card and the place to move it to: card column" << endl;
-					cin>>card;
-					cin>>location;
-					//call place(card,location) in player class
-				case 3
-					int column1;
-					int column2;
-					cout << "enter the column's location and the columns new location, column column" << endl;
-					cin>>column1;
-					cin>>column2;
-					//call moveColumn(column1, column2) in player class
-				case 4
-					//call showhand() function in player class
-				case 5
-					//not sure how to flash the board
-				case 6
-					//break
-		}
-		//take player turns
-		//on win, set victory to number of victorious player
-=======
 		p1.actionsLoop();
 		p2.actionsLoop();
 		p3.actionsLoop();
 		p4.actionsLoop();
->>>>>>> origin/master
 	}
 	return victory; //eventually, return winner's name
 	
