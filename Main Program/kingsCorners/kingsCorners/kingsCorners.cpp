@@ -81,7 +81,7 @@ int Column::size() const {
 	return cards.size();
 }
 
-
+/*
 class Player {
 public:
 	void showHand();
@@ -106,8 +106,52 @@ void Player::place(Card crd, Column clmn) {
 void Player::place(Column clmn1, Column clmn2) {
 
 }
+*/
 
+class Player{
+public:
+	void showHand();
+	void place(Card crd, Column clmn); // places a card on a column
+	void place(Column clmn1, Column clmn2); // places column2 on column1
+	void endTurn();//ends player's turn
+	//void spy(player spiedOn);//spy on other players' hands?
+	void draw();
+	bool pass = 0;
+private:
+	vector<Card> hand; 
+};
 
+void Player::showHand() // start of showHand function
+{
+	
+	for (int i=0; i<hand.size(); i++)
+		cout<<hand.at(i).getValue()<<" of "<<hand.at(i).getSuit()<<endl;
+}
+
+void place(Card crd, Column clmn)
+{
+	clmn.addCard(crd);
+}
+
+void place(Column clmn1, Column clmn2)
+{
+	for (int i=0; clmn2.size();i++)
+	{
+		clmn1.push_back(clmn2.at(i))  
+	}
+}
+
+void endTurn()
+{
+	pass = 1;
+}
+
+void draw()
+{
+	card drawn = deck.getTop()
+	hand.pushBack() = drawn;
+	deck.removeCard(drawn);
+}
 
 int playerCount(){
 	do{
