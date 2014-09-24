@@ -116,7 +116,7 @@ public:
 	void endTurn();//ends player's turn
 	//void spy(player spiedOn);//spy on other players' hands?
 	void draw();
-	bool pass = 0;
+	bool pass = 0; //maybe make this private?
 private:
 	vector<Card> hand; 
 };
@@ -128,34 +128,34 @@ void Player::showHand() // start of showHand function
 		cout<<hand.at(i).getValue()<<" of "<<hand.at(i).getSuit()<<endl;
 }
 
-void place(Card crd, Column clmn)
+void Player::place(Card crd, Column clmn)
 {
 	clmn.addCard(crd);
 }
 
-void place(Column clmn1, Column clmn2)
+void Player::place(Column clmn1, Column clmn2)
 {
 	for (int i=0; clmn2.size();i++)
 	{
-		clmn1.push_back(clmn2.at(i))  
+		clmn1.addCard(clmn2.at(i));  
 	}
 }
 
-void endTurn()
+void Player::endTurn()
 {
-	pass = 1;
+	pass = true;
 }
 
-void draw()
+void Player::draw()
 {
-	card drawn = deck.getTop()
+	Card drawn = deck.getTop()
 	hand.pushBack() = drawn;
 	deck.removeCard(drawn);
 }
 
 int playerCount(){
+	int count=0;
 	do{
-		int count=0;
 		cout<<"How many human players want to play (1-4)?\n";
 		cin>>count;
 	} while (count<=1&&count>=4);
