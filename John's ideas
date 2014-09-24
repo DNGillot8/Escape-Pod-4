@@ -14,6 +14,7 @@ public:
 
 class Player{
 public:
+	void generateHand();
 	void showHand();
 	void place(Card crd, Column clmn); // places a card on a column
 	void place(Column clmn1, Column clmn2); // places a column on another column
