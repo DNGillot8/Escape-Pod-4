@@ -70,7 +70,7 @@ Card Column::getBottom() const {
 }
 
 void Column::clear() {
-	cards.clear;
+	cards.clear();
 }
 
 void Column::shuffle() {
@@ -108,6 +108,15 @@ void Player::place(Column clmn1, Column clmn2) {
 }
 */
 
+bool isValidMove(Card source, Card dest){
+	return 0;// if source is 1 less than dest and they are not the same suit
+}
+
+bool isValidMove(Column source, Column dest){
+	return isValidMove(source.getTop(), dest.getBottom());
+}
+
+
 class Player{
 public:
 	void showHand();
@@ -115,8 +124,8 @@ public:
 	void place(Column clmn1, Column clmn2); // places column2 on column1
 	void endTurn();//ends player's turn
 	//void spy(player spiedOn);//spy on other players' hands?
-	void draw();
-	bool pass = 0; //maybe make this private?
+	void draw(Column deck);
+	bool pass; //maybe make this private? Must be initialized to 0 in constructor
 private:
 	vector<Card> hand; 
 };
@@ -137,7 +146,7 @@ void Player::place(Column clmn1, Column clmn2)
 {
 	for (int i=0; clmn2.size();i++)
 	{
-		clmn1.addCard(clmn2.at(i));  
+		clmn1.addCard(clmn2.getCard(i)); 
 	}
 }
 
@@ -146,12 +155,14 @@ void Player::endTurn()
 	pass = true;
 }
 
-void Player::draw()
+void Player::draw(Column deck)
 {
-	Card drawn = deck.getTop()
-	hand.pushBack() = drawn;
+	Card drawn = deck.getTop();
+	hand.push_back(drawn);
 	deck.removeCard(drawn);
 }
+
+
 
 int playerCount(){
 	int count=0;
@@ -162,12 +173,59 @@ int playerCount(){
 	return count;
 }
 
+
+class aiPlayer: public Player{
+public:
+	void actionsLoop();
+private:
+};
+
+void aiPlayer::actionsLoop(){
+}
+
+class realPlayer: public Player{
+public:
+	void actionsLoop();
+	int displayMenu();
+private:
+};
+
+void realPlayer::actionsLoop(){
+	int choice=displayMenu();
+	while(choice!=3){
+		if(choice==1){
+
+		}
+		else{
+
+		}
+	}
+}
+
+int realPlayer::displayMenu(){
+	int choice=0;
+		cout<<"What would you like to do?\n";
+		cout<<"  -1) play a card from your hand\n";
+		cout<<"  -2) move a column\n";
+		cout<<"  -3) pass";
+
+		while(choice<1||choice>3){
+			cin>>choice;
+			if(choice<1||choice>3) cout<<"Sorry, please enter a valid integer in range 1-3";
+		}
+
+		return choice;
+}
+
+
+
+
 void reportWinner(int winner){
 	cout<<"Player"<<winner<<"is the winner!!!";
 }
 
 void displayRules(){
-	//display the rules
+	cout<<"PUT RULES HERE\n";
 }
 
 int main()
@@ -189,12 +247,15 @@ int main()
 		case 2:
 			displayRules();
 			break;
-	}
+		}
 	
 	return 0;
+	}
 }
 
 
+//game loop ideas
+/*
 int gameLoop(int realPlayers){
 	switch (realPlayers){
 	case 1:
@@ -217,6 +278,7 @@ int gameLoop(int realPlayers){
 	int victory=0;
 	int playerChoice = 0;
 	while(!victory){
+<<<<<<< HEAD
 		//player 1 turn
 		for (int i = 1; i <= realPlayers, i++)
 		{
@@ -254,11 +316,14 @@ int gameLoop(int realPlayers){
 		}
 		//take player turns
 		//on win, set victory to number of victorious player
+=======
+		p1.actionsLoop();
+		p2.actionsLoop();
+		p3.actionsLoop();
+		p4.actionsLoop();
+>>>>>>> origin/master
 	}
 	return victory; //eventually, return winner's name
 	
 }
-
-
-
-
+*\

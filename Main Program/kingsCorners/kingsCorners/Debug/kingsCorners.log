@@ -1,0 +1,104 @@
+﻿Build started 9/24/2014 3:07:59 PM.
+     1>Project "C:\Users\UmbleJA1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt kingsCorners.cpp
+         kingsCorners.cpp
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(127): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(151): error C2065: 'deck' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(151): error C2228: left of '.getTop' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(152): error C2146: syntax error : missing ';' before identifier 'hand'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(152): error C2039: 'pushBack' : is not a member of 'std::vector<_Ty>'
+                 with
+                 [
+                     _Ty=Card
+                 ]
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(153): error C2065: 'deck' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(153): error C2228: left of '.removeCard' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(203): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(207): error C3861: 'mainMenu': identifier not found
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(212): error C2440: 'initializing' : cannot convert from 'int (__cdecl *)(void)' to 'int'
+                 There is no context in which this conversion is possible
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(213): error C2065: 'victory' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(213): error C3861: 'gameLoop': identifier not found
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(215): error C2065: 'victory' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(217): error C2360: initialization of 'players' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(212) : see declaration of 'players'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(233): error C2360: initialization of 'p4' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p4'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(233): error C2360: initialization of 'p3' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p3'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(233): error C2360: initialization of 'p2' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p2'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(233): error C2360: initialization of 'p1' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(230) : see declaration of 'p1'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(234): error C2086: 'realPlayer p1' : redefinition
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(230) : see declaration of 'p1'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(234): error C2371: 'p2' : redefinition; different basic types
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p2'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(235): error C2086: 'aiPlayer p3' : redefinition
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p3'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(235): error C2086: 'aiPlayer p4' : redefinition
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p4'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(237): error C2360: initialization of 'p4' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(235) : see declaration of 'p4'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(237): error C2360: initialization of 'p3' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(235) : see declaration of 'p3'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(237): error C2360: initialization of 'p2' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(234) : see declaration of 'p2'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(237): error C2360: initialization of 'p1' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(234) : see declaration of 'p1'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p4'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p3'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p2'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(230) : see declaration of 'p1'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(238): error C2086: 'realPlayer p1' : redefinition
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(230) : see declaration of 'p1'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(238): error C2371: 'p2' : redefinition; different basic types
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p2'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(238): error C2371: 'p3' : redefinition; different basic types
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p3'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(239): error C2086: 'aiPlayer p4' : redefinition
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p4'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(241): error C2360: initialization of 'p4' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(239) : see declaration of 'p4'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(241): error C2360: initialization of 'p3' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(238) : see declaration of 'p3'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(241): error C2360: initialization of 'p2' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(238) : see declaration of 'p2'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(241): error C2360: initialization of 'p1' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(238) : see declaration of 'p1'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(235) : see declaration of 'p4'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(235) : see declaration of 'p3'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(234) : see declaration of 'p2'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(234) : see declaration of 'p1'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p4'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p3'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p2'
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(230) : see declaration of 'p1'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(242): error C2086: 'realPlayer p1' : redefinition
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(230) : see declaration of 'p1'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(242): error C2371: 'p2' : redefinition; different basic types
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p2'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(242): error C2371: 'p3' : redefinition; different basic types
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p3'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(242): error C2371: 'p4' : redefinition; different basic types
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(231) : see declaration of 'p4'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(248): error C2065: 'p1' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(248): error C2228: left of '.actionsLoop' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(249): error C2065: 'p2' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(249): error C2228: left of '.actionsLoop' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(250): error C2065: 'p3' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(250): error C2228: left of '.actionsLoop' must have class/struct/union
+                 type is ''unknown-type''
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(251): error C2065: 'p4' : undeclared identifier
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(251): error C2228: left of '.actionsLoop' must have class/struct/union
+                 type is ''unknown-type''
+     1>Done Building Project "C:\Users\UmbleJA1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.15
