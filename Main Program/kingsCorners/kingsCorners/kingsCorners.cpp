@@ -82,9 +82,37 @@ int Column::size() const {
 }
 
 
+class Player {
+public:
+	void showHand();
+	void place(Card crd, Column clmn); // places a card on a column
+	void place(Column clmn1, Column clmn2); // places a column on another column
+private:
+	vector<Card> hand; // we don't really need this
+};
+
+
+void Player::showHand() // start of showHand function
+{
+	for (size_t i=0; i<hand.size(); i++) {
+		cout<< hand.at(i).getValue() << " of " << hand.at(i).getSuit() << endl;
+	}
+}
+
+void Player::place(Card crd, Column clmn) {
+
+}
+
+void Player::place(Column clmn1, Column clmn2) {
+
+}
+
+
 int main()
 {
-	srand(time(0))
+	//srand(time(0));
+	Player p;
+	p.showHand();
 	return 0;
 }
 
