@@ -390,9 +390,10 @@ bool aiPlayer::takeTurn(Board b){
 class realPlayer: public Player{
 public:
 	//void takeTurn(); //try and eventually implement this
-	void actionsLoop();
+	void actionsLoop(Board b);
 	int displayMenu();
 	int chooseFromCardsInHand();
+	int chooseLocation();
 private:
 };
 
@@ -405,26 +406,65 @@ int realPlayer::chooseFromCardsInHand()
 	return chosenCard-1;
 }
 
-void realPlayer::actionsLoop(){
+int realPlayer::chooseLocation()
+{
+       int location = 0;
+	   do{
+       cout << "Choose which column you are referring to, 1 being top-left, 8 being bottom-right.\n" << endl;
+       cin >> location;
+	   location--;
+	   if (location<0||location>7) cout<<"Please choose a valid column!\n";
+	   }while (location<0||location>7);
+       return location;
+}
+
+
+void realPlayer::actionsLoop(Board b){
 	cout<<"It's your turn.\n";
 	int choice=displayMenu();
+	int dest=0;
+	int sourceCol=0;
+	Card source;
+
 	while(choice!=5){
 
 		switch(choice){
 		case 1:
-			Card source=hand[chooseFromCardsInHand()];//menu
-			Card dest=chooseLocation();//menu
-			if(isValidMove(source, dest)){
-		case 2:
-		case 3:
-		case 4:
-		case 5:
+			source=hand[chooseFromCardsInHand()];//menu
+			dest=chooseLocation();//menu
+			if(isValidMove(source, b.columns[dest])){
+				place(source,b.columns[dest]);
+			}
+			else{
+				cout<<"Sorry, not a valid move.\n";
+			}
+			break;
 
+		case 2:
+			cout<<"Choose first location.";
+			sourceCol=chooseLocation();
+			cout<<"Choose second location.";
+			dest=chooseLocation();
+			if(isValidMove(b.columns[sourceCol], b.columns[dest])){
+				place(source,b.columns[dest]);
+			}
+			else{
+				cout<<"Sorry, not a valid move.\n";
+			}
+			break;
+
+		case 3:
+			showHand();
+			break;
+
+		case 4:
+			drawBoard(b);
+			break;
 		}
 		choice=displayMenu();
 	}
 }
-}
+
 
 int realPlayer::displayMenu(){
 	int choice=0;
@@ -469,7 +509,7 @@ int turnMenu()
 	return answer;
 }
 
-int gameLoop(){/*   //game loop ideas
+/*int gameLoop(){   //game loop ideas
 	switch (realPlayers){
 	case 1:
 		realPlayer p1;
@@ -520,8 +560,8 @@ int gameLoop(){/*   //game loop ideas
 	return victory; //eventually, return winner's name
 	
 	}
-	*/
-}
+	
+}*/
 
 
 int main()
@@ -534,10 +574,7 @@ int main()
 		system("cls");
 		switch (mode){
 		case 1:
-			int victory=gameLoop();
-			system("cls");
-			reportWinner(victory);
-			break;
+			
 		case 2:
 			displayRules();
 			break;
