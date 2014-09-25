@@ -88,7 +88,7 @@ int Column::size() const {
 class Board{
 public:
 	Board();
-	void deckShuffle();
+	//void deckShuffle();
 	Value intToValue(int intValue);
 	Suit intToSuit(int intSuit);
 	Column columns[8];
@@ -106,14 +106,14 @@ Board::Board() {
 			Board::deck.addCard(c);
 		}
 	}
-	deckShuffle();
+	deck.shuffle();
 	
 	//take four off the top of the deck and put them at four column spots
 }
 
-void Board::deckShuffle() {
-	random_shuffle(deck.begin(), deck.end());
-}
+//void Board::deckShuffle() {
+//	random_shuffle(deck.begin(), deck.end());
+//}
 
 Value intToValue(int intValue) {
 	switch(intValue) {
