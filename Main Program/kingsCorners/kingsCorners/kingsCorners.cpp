@@ -20,34 +20,6 @@ using std::rand;
 using std::srand;
 
 
-class Board{
-public:
-	Board();
-	void deckShuffle();
-	Column columns[8];
-	Column deck;
-};
-
-Board::Board() {
-	Value valueName;
-	Suit suitName;
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 13; j++) {
-			valueName = j;
-			suitName = i;
-			Card c(valueName, suitName);
-			Board::deck.push_back(c);
-		}
-	}
-	deck.deckShuffle();
-	
-	//take four off the top of the deck and put them at four column spots
-}
-
-void Board::deckShuffle() {
-	random_shuffle(deck.begin(), deck.end());
-}
-
 class Column {
 public:
 	//void checkIfValid(); //make sure alternating colors, might not be needed
@@ -115,6 +87,33 @@ int Column::size() const {
 }
 
 
+
+
+class Board{
+public:
+	Board();
+	void deckShuffle();
+	Column columns[8];
+	Column deck;
+};
+
+Board::Board() {
+	Value valueName;
+	Suit suitName;
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 13; j++) {
+			valueName = j;
+			suitName = i;
+			Card c(valueName, suitName);
+			Board::deck.addCard(c);
+		}
+	}
+	deck.shuffle();
+	
+	//take four off the top of the deck and put them at four column spots
+}
+
+
 /*
 class Player {
 public:
@@ -144,28 +143,28 @@ void Player::place(Column clmn1, Column clmn2) {
 
 
 bool areDifferentColors(Card c1, Card c2){
-	if (c1.getSuit == clubs && c2.getSuit == diamonds) {
+	if (c1.getSuit() == clubs && c2.getSuit() == diamonds) {
 		return true;
 	}
-	else if (c1.getSuit == clubs && c2.getSuit == hearts) {
+	else if (c1.getSuit() == clubs && c2.getSuit() == hearts) {
 		return true;
 	}
-	else if (c1.getSuit == spades && c2.getSuit == diamonds) {
+	else if (c1.getSuit() == spades && c2.getSuit() == diamonds) {
 		return true;
 	}
-	else if (c1.getSuit == spades && c2.getSuit == hearts) {
+	else if (c1.getSuit() == spades && c2.getSuit() == hearts) {
 		return true;
 	}
-	else if (c1.getSuit == diamonds && c2.getSuit == clubs) {
+	else if (c1.getSuit() == diamonds && c2.getSuit() == clubs) {
 		return true;
 	}
-	else if (c1.getSuit == diamonds && c2.getSuit == spades) {
+	else if (c1.getSuit() == diamonds && c2.getSuit() == spades) {
 		return true;
 	}
-	else if (c1.getSuit == hearts && c2.getSuit == clubs) {
+	else if (c1.getSuit() == hearts && c2.getSuit() == clubs) {
 		return true;
 	}
-	else if (c1.getSuit == hearts && c2.getSuit == spades) {
+	else if (c1.getSuit() == hearts && c2.getSuit() == spades) {
 		return true;
 	}
 	else {
@@ -173,9 +172,16 @@ bool areDifferentColors(Card c1, Card c2){
 	}
 }
 
+bool isValidMove(Card source, Card dest){
+	if ((dest.getValue()-source.getValue()==1)&&(areDifferentColors(source,dest))){
+		return 1; // if source is 1 less than dest and they are not the same color
+	}
+	return 0;
+}
+
 bool isValidMove(Card source, Column dest){
 	if ((dest.getTop().getValue()-source.getValue()==1)&&(areDifferentColors(source,dest.getTop()))){
-		return 1; // if source is 1 less than dest and they are not the same suit
+		return 1; // if source is 1 less than dest and they are not the same color
 	}
 	return 0;
 }
@@ -336,7 +342,7 @@ void aiPlayer::actionsLoop(Board b){
 	draw(b.deck);//draw
 	cout<<"Computer player drew a card.\n";
 
-	for(int i=0; i<b.columns.size(); i++){//find valid column moves
+	for(int i=0; i<8; i++){//find valid column moves
 		findValidLocations(b.columns[i].getBottom(),b);
 		for(int j=0;j<8;j++){
 			if(validLocation[j]){
@@ -352,7 +358,7 @@ void aiPlayer::actionsLoop(Board b){
 				for(int l=0;l<8;l++){
 					if(validLocation[l]){
 						place(hand[k],b.columns[k]);
-						hand.erase(k);//what is this error??
+						hand.erase(hand.begin()+k);//what is this error??
 						cout<<"Computer player played a\n";//<<cardname\n
 						i=0;
 						k=0;
@@ -373,7 +379,7 @@ void aiPlayer::findValidLocations(Card source, Board b){
 }
 
 bool aiPlayer::victory(){
-	return(hand.size==0);
+	return(hand.size()==0);
 }
 
 bool aiPlayer::takeTurn(Board b){
@@ -419,31 +425,6 @@ int realPlayer::displayMenu(){
 
 		return choice;
 }
-
-int main()
-{
-	srand(time(0));
-
-	int mode=0;
-	while(mode!=3){
-		mode=mainMenu();
-		system("cls");
-		switch (mode){
-		case 1:
-			int victory=gameLoop();
-			system("cls");
-			reportWinner(victory);
-			break;
-		case 2:
-			displayRules();
-			break;
-		}
-	
-	return 0;
-	}
-}
-
-
 
 int gameLoop(){/*   //game loop ideas
 	switch (realPlayers){
@@ -502,4 +483,46 @@ int gameLoop(){/*   //game loop ideas
 	}
 	return victory; //eventually, return winner's name
 	
+	}
 }
+
+int mainMenu(){
+	cout<<"Welcome to KINGS IN CORNERS\nan ESCAPE POD 4 production\n\n";
+
+	int input=0;
+	do{
+	cout<<"What would you like to do?\n";
+	cout<<"  -1) Start a game\n";
+	cout<<"  -2) Display the rules\n";
+	cout<<"  -3) Quit\n";
+	cin>>input;
+	if(input<1||input>3) cout<<"\nPlease enter a valid value in range 1 through 3";
+	}while(input<1||input>3);
+	return input;
+}
+
+int main(){
+	srand(time(0));
+
+	int mode=0;
+	int victory=0;
+	while(mode!=3){
+		mode=mainMenu();
+		system("cls");
+		switch (mode){
+		case 1:
+			victory=gameLoop();
+			system("cls");
+			reportWinner(victory);
+			break;
+		case 2:
+			displayRules();
+			break;
+		}
+	
+	return 0;
+	}
+}
+
+
+
