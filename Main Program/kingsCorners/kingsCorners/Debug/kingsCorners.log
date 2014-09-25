@@ -1,34 +1,34 @@
-﻿Build started 9/24/2014 10:32:03 PM.
+﻿Build started 9/24/2014 11:21:46 PM.
      1>Project "C:\Users\UmbleJA1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt kingsCorners.cpp
          kingsCorners.cpp
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(314): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(371): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(417): error C3861: 'chooseFromCardsInHand': identifier not found
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(418): error C3861: 'chooseLocation': identifier not found
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(500): error C2360: initialization of 'location' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(495) : see declaration of 'location'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(500): error C2360: initialization of 'card' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(494) : see declaration of 'card'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(507): error C2360: initialization of 'location' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(495) : see declaration of 'location'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(507): error C2360: initialization of 'card' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(494) : see declaration of 'card'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(509): error C2360: initialization of 'location' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(495) : see declaration of 'location'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(509): error C2360: initialization of 'card' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(494) : see declaration of 'card'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(511): error C2360: initialization of 'location' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(495) : see declaration of 'location'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(511): error C2360: initialization of 'card' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(494) : see declaration of 'card'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(513): error C2143: syntax error : missing ';' before '}'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(521): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(533): error C2360: initialization of 'victory' is skipped by 'case' label
-                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(529) : see declaration of 'victory'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(289): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(296): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(354): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(416): error C3861: 'chooseLocation': identifier not found
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(418): error C2360: initialization of 'dest' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(416) : see declaration of 'dest'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(418): error C2360: initialization of 'source' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(415) : see declaration of 'source'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(419): error C2360: initialization of 'dest' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(416) : see declaration of 'dest'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(419): error C2360: initialization of 'source' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(415) : see declaration of 'source'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(420): error C2360: initialization of 'dest' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(416) : see declaration of 'dest'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(420): error C2360: initialization of 'source' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(415) : see declaration of 'source'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(421): error C2360: initialization of 'dest' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(416) : see declaration of 'dest'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(421): error C2360: initialization of 'source' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(415) : see declaration of 'source'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(423): error C2143: syntax error : missing ';' before '}'
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(529): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(541): error C2360: initialization of 'victory' is skipped by 'case' label
+                 c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(537) : see declaration of 'victory'
      1>Done Building Project "C:\Users\UmbleJA1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:00.53
+Time Elapsed 00:00:01.15
