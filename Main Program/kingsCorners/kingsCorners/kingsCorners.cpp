@@ -111,13 +111,13 @@ Board::Board() {
 	deckShuffle();
 	
 	//take four off the top of the deck and put them at the four adjacent columns, not corners
-	columns[2].addCard(deck.getTop());
+	columns[1].addCard(deck.getTop());
+	deck.removeCard(deck.getTop());
+	columns[3].addCard(deck.getTop());
 	deck.removeCard(deck.getTop());
 	columns[4].addCard(deck.getTop());
 	deck.removeCard(deck.getTop());
-	columns[5].addCard(deck.getTop());
-	deck.removeCard(deck.getTop());
-	columns[7].addCard(deck.getTop());
+	columns[6].addCard(deck.getTop());
 	deck.removeCard(deck.getTop());
 }
 
@@ -224,71 +224,71 @@ int playerCount(){
 void drawBoard(Board b){
 	cout<<"1----2----3----+\n";
 
+	if(b.columns[0].size()>1) cout<<"| "<<b.valueToChar(b.columns[0].getBottom().getValue())<<b.suitToChar(b.columns[0].getBottom().getSuit())<<" ";
+	else cout<<"|    ";
 	if(b.columns[1].size()>1) cout<<"| "<<b.valueToChar(b.columns[1].getBottom().getValue())<<b.suitToChar(b.columns[1].getBottom().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[2].size()>1) cout<<"| "<<b.valueToChar(b.columns[2].getBottom().getValue())<<b.columns[2].getBottom().getSuit()<<" ";
-	else cout<<"|    ";
-	if(b.columns[3].size()>1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.columns[3].getBottom().getSuit()<<" |\n";
+	if(b.columns[2].size()>1) cout<<"| "<<b.valueToChar(b.columns[2].getBottom().getValue())<<b.suitToChar(b.columns[2].getBottom().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
-	if(b.columns[1].size()==1) cout<<"| "<<b.columns[1].getTop().getValue()<<b.columns[1].getTop().getSuit()<<" ";
+	if(b.columns[0].size()==1) cout<<"| "<<b.valueToChar(b.columns[0].getTop().getValue())<<b.suitToChar(b.columns[0].getTop().getSuit())<<" ";
 	else cout<<"| // ";
-	if(b.columns[2].size()==1) cout<<"| "<<b.columns[2].getTop().getValue()<<b.columns[2].getTop().getSuit()<<" ";
+	if(b.columns[1].size()==1) cout<<"| "<<b.valueToChar(b.columns[1].getTop().getValue())<<b.suitToChar(b.columns[1].getTop().getSuit())<<" ";
 	else cout<<"| // ";
-	if(b.columns[3].size()==1) cout<<"| "<<b.columns[3].getTop().getValue()<<b.columns[3].getTop().getSuit()<<" |\n";
+	if(b.columns[2].size()==1) cout<<"| "<<b.valueToChar(b.columns[2].getTop().getValue())<<b.suitToChar(b.columns[2].getTop().getSuit())<<" |\n";
 	else cout<<"| // |\n";
 
-	if(b.columns[1].size()>1) cout<<"| "<<b.columns[1].getTop().getValue()<<b.columns[1].getTop().getSuit()<<" ";
+	if(b.columns[0].size()>1) cout<<"| "<<b.valueToChar(b.columns[0].getTop().getValue())<<b.suitToChar(b.columns[0].getTop().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[2].size()>1) cout<<"| "<<b.columns[2].getTop().getValue()<<b.columns[2].getTop().getSuit()<<" ";
+	if(b.columns[1].size()>1) cout<<"| "<<b.valueToChar(b.columns[1].getTop().getValue())<<b.suitToChar(b.columns[1].getTop().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[3].size()>1) cout<<"| "<<b.columns[3].getTop().getValue()<<b.columns[3].getTop().getSuit()<<" |\n";
+	if(b.columns[2].size()>1) cout<<"| "<<b.valueToChar(b.columns[2].getTop().getValue())<<b.suitToChar(b.columns[2].getTop().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
 	cout<<"4----+----5----+\n";
 
-	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
+	if(b.columns[3].size()>1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.suitToChar(b.columns[3].getBottom().getSuit())<<" ";
 	else cout<<"|    ";
 	cout<<"| ]< ";
-	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
+	if(b.columns[4].size()>1) cout<<"| "<<b.valueToChar(b.columns[4].getBottom().getValue())<<b.suitToChar(b.columns[4].getBottom().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
-	if(b.columns[4].size()==1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
+	if(b.columns[3].size()==1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.suitToChar(b.columns[3].getBottom().getSuit())<<" ";
 	else cout<<"| // ";
 	cout<<"|() T";
-	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
+	if(b.columns[4].size()==1) cout<<"| "<<b.valueToChar(b.columns[4].getBottom().getValue())<<b.suitToChar(b.columns[4].getBottom().getSuit())<<" |\n";
 	else cout<<"| // |\n";
 
-	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
+	if(b.columns[3].size()>1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.suitToChar(b.columns[3].getBottom().getSuit())<<" ";
 	else cout<<"|    ";
 	cout<<"| 'C ";
-	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
+	if(b.columns[4].size()>1) cout<<"| "<<b.valueToChar(b.columns[4].getBottom().getValue())<<b.suitToChar(b.columns[4].getBottom().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
 	cout<<"6----7----8----+\n";
 
-	if(b.columns[6].size()>1) cout<<"| "<<b.columns[6].getBottom().getValue()<<b.columns[6].getBottom().getSuit()<<" ";
+	if(b.columns[5].size()>1) cout<<"| "<<b.valueToChar(b.columns[5].getBottom().getValue())<<b.suitToChar(b.columns[5].getBottom().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[7].size()>1) cout<<"| "<<b.columns[7].getBottom().getValue()<<b.columns[7].getBottom().getSuit()<<" ";
+	if(b.columns[6].size()>1) cout<<"| "<<b.valueToChar(b.columns[6].getBottom().getValue())<<b.suitToChar(b.columns[6].getBottom().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[8].size()>1) cout<<"| "<<b.columns[8].getBottom().getValue()<<b.columns[8].getBottom().getSuit()<<" |\n";
+	if(b.columns[7].size()>1) cout<<"| "<<b.valueToChar(b.columns[7].getBottom().getValue())<<b.suitToChar(b.columns[7].getBottom().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
-	if(b.columns[6].size()==1) cout<<"| "<<b.columns[6].getTop().getValue()<<b.columns[6].getTop().getSuit()<<" ";
+	if(b.columns[5].size()==1) cout<<"| "<<b.valueToChar(b.columns[5].getTop().getValue())<<b.suitToChar(b.columns[5].getTop().getSuit())<<" ";
 	else cout<<"| // ";
-	if(b.columns[7].size()==1) cout<<"| "<<b.columns[7].getTop().getValue()<<b.columns[7].getTop().getSuit()<<" ";
+	if(b.columns[6].size()==1) cout<<"| "<<b.valueToChar(b.columns[6].getTop().getValue())<<b.suitToChar(b.columns[6].getTop().getSuit())<<" ";
 	else cout<<"| // ";
-	if(b.columns[8].size()==1) cout<<"| "<<b.columns[8].getTop().getValue()<<b.columns[8].getTop().getSuit()<<" |\n";
+	if(b.columns[7].size()==1) cout<<"| "<<b.valueToChar(b.columns[7].getTop().getValue())<<b.suitToChar(b.columns[7].getTop().getSuit())<<" |\n";
 	else cout<<"| // |\n";
 
-	if(b.columns[6].size()>1) cout<<"| "<<b.columns[6].getTop().getValue()<<b.columns[6].getTop().getSuit()<<" ";
+	if(b.columns[5].size()>1) cout<<"| "<<b.valueToChar(b.columns[5].getTop().getValue())<<b.suitToChar(b.columns[5].getTop().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[7].size()>1) cout<<"| "<<b.columns[7].getTop().getValue()<<b.columns[7].getTop().getSuit()<<" ";
+	if(b.columns[6].size()>1) cout<<"| "<<b.valueToChar(b.columns[6].getTop().getValue())<<b.suitToChar(b.columns[6].getTop().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[8].size()>1) cout<<"| "<<b.columns[8].getTop().getValue()<<b.columns[8].getTop().getSuit()<<" |\n";
+	if(b.columns[7].size()>1) cout<<"| "<<b.valueToChar(b.columns[7].getTop().getValue())<<b.suitToChar(b.columns[7].getTop().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
-	cout<<"+----+----+----+\n";
+	cout<<"+----+----+----+\n\n";
 }
 
 void reportWinner(int winner){
@@ -296,7 +296,16 @@ void reportWinner(int winner){
 }
 
 void displayRules(){
-	cout<<"PUT RULES HERE\n";
+	cout<<"First, choose how many human and computer players you would like.\n"<<
+		"At the beginning of the game every player is dealt 7 cards.  At the\n"<<
+		"start of every turn, the play must draw a card from the top of the \n"<<
+		"deck.\nThe goal of the game is to play cards from your hand onto one \n"<<
+		"of the columns.  The card played must be next lower in rank and\n"<<
+		"opposite in color to the current top card.  You can play any card onto \n"<<
+		"empty columns around the straight sides of the deck and only kings\n"<<
+		"on the corners of the deck.  You may also stack columns.  If cannot \n"<<
+		"make any more moves, end your turn.  The game ends when someone plays \n"<<
+		"all the cards in their hand.\n";
 }
 
 
@@ -322,8 +331,8 @@ Player::Player() {
 void Player::showHand() // start of showHand function
 {
 	
-	for (int i=0; i<hand.size(); i++)
-		cout<<hand.at(i).getValue()<<" of "<<hand.at(i).getSuit()<<endl;
+	for (int i=0; i<hand.size(); i++) cout<<i<<") "<<hand.at(i).name()<<endl;
+	cout<<endl;
 }
 
 void Player::place(Card crd, Column &clmn)
@@ -468,7 +477,7 @@ void realPlayer::actionsLoop(Board b){
 		switch(choice){
 		case 1:
 			source=hand[chooseFromCardsInHand()];//menu
-			dest=chooseLocation();//menu
+			dest=chooseLocation()-1;//menu
 			if(isValidMove(source, b.columns[dest])){
 				place(source,b.columns[dest]);
 			}
@@ -479,9 +488,9 @@ void realPlayer::actionsLoop(Board b){
 
 		case 2:
 			cout<<"Choose first location.\n";
-			sourceCol=chooseLocation();
+			sourceCol=(chooseLocation()-1);
 			cout<<"Choose second location.\n";
-			dest=chooseLocation();
+			dest=(chooseLocation()-1);
 			if(isValidMove(b.columns[sourceCol], b.columns[dest])){
 				place(source,b.columns[dest]);
 			}
@@ -517,7 +526,7 @@ int realPlayer::displayMenu(){
 			cin>>choice;
 			if(choice<1||choice>5) cout<<"Sorry, please enter a valid integer in range 1-5";
 		}
-
+		system("cls");
 		return choice;
 }
 
@@ -609,10 +618,19 @@ int main()
 	realPlayer human; //constructors?
 	aiPlayer ai;
 
+
+for(int i=0;i<7;++i){
+	human.draw(b.deck);
+	b.deck.removeCard(b.deck.getTop());
+	ai.draw(b.deck);
+	b.deck.removeCard(b.deck.getTop());
+	}
+
 	int mode=0;
 	while(mode!=3){
 		mode=mainMenu();
 		system("cls");
+		
 		switch (mode){
 		case 1:
 			while(true){
