@@ -91,6 +91,8 @@ public:
 	void deckShuffle();
 	Value intToValue(int intValue);
 	Suit intToSuit(int intSuit);
+	char valueToChar(Value v);
+	char suitToChar(Suit s);
 	Column columns[8];
 	Column deck;
 };
@@ -115,7 +117,7 @@ void Board::deckShuffle(){
 	deck.shuffle();
 }
 
-Value intToValue(int intValue) {
+Value Board::intToValue(int intValue) {
 	switch(intValue) {
 	case 0: return ace; break;
 	case 1: return deuce; break;
@@ -133,7 +135,7 @@ Value intToValue(int intValue) {
 	}
 }
 
-Suit intToSuit(int intSuit) {
+Suit Board::intToSuit(int intSuit) {
 	switch(intSuit) {
 	case 0: return clubs; break;
 	case 1: return diamonds; break;
@@ -142,6 +144,32 @@ Suit intToSuit(int intSuit) {
 	}
 }
 
+char Board::valueToChar(Value v){
+	switch(v){
+		case ace: return 'A'; break;
+		case deuce: return '2'; break;
+		case trey: return '3'; break;
+		case four: return '4'; break; 
+		case five: return '5'; break;
+		case six: return '6'; break;
+		case seven: return '7'; break;
+		case eight: return '8'; break;
+		case nine: return '9'; break;
+		case ten: return 'T'; break;
+		case jack: return 'J'; break;
+		case queen: return 'Q'; break;
+		case king: return 'K'; break;
+	}
+}
+
+char Board::suitToChar(Suit s){
+	switch(s){
+		case clubs: return 'C'; break;
+		case diamonds: return 'D'; break;
+		case hearts: return 'H'; break;
+		case spades: return 'S'; break; 
+	}
+}
 
 
 
@@ -186,50 +214,50 @@ int playerCount(){
 }
 
 void drawBoard(Board b){
-	cout<<"1----2----3----+";
+	cout<<"1----2----3----+\n";
 
 	if(b.columns[1].size()>1) cout<<"| "<<b.columns[1].getBottom().getValue()<<b.columns[1].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 	if(b.columns[2].size()>1) cout<<"| "<<b.columns[2].getBottom().getValue()<<b.columns[2].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 	if(b.columns[3].size()>1) cout<<"| "<<b.columns[3].getBottom().getValue()<<b.columns[3].getBottom().getSuit()<<" |\n";
-	else cout<<"|    |";
+	else cout<<"|    |\n";
 
 	if(b.columns[1].size()==1) cout<<"| "<<b.columns[1].getTop().getValue()<<b.columns[1].getTop().getSuit()<<" ";
 	else cout<<"| // ";
 	if(b.columns[2].size()==1) cout<<"| "<<b.columns[2].getTop().getValue()<<b.columns[2].getTop().getSuit()<<" ";
 	else cout<<"| // ";
 	if(b.columns[3].size()==1) cout<<"| "<<b.columns[3].getTop().getValue()<<b.columns[3].getTop().getSuit()<<" |\n";
-	else cout<<"| // |";
+	else cout<<"| // |\n";
 
 	if(b.columns[1].size()>1) cout<<"| "<<b.columns[1].getTop().getValue()<<b.columns[1].getTop().getSuit()<<" ";
 	else cout<<"|    ";
 	if(b.columns[2].size()>1) cout<<"| "<<b.columns[2].getTop().getValue()<<b.columns[2].getTop().getSuit()<<" ";
 	else cout<<"|    ";
 	if(b.columns[3].size()>1) cout<<"| "<<b.columns[3].getTop().getValue()<<b.columns[3].getTop().getSuit()<<" |\n";
-	else cout<<"|    |";
+	else cout<<"|    |\n";
 
-	cout<<"4----+----5----+";
+	cout<<"4----+----5----+\n";
 
 	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 	cout<<"| ]< ";
 	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
-	else cout<<"|    |";
+	else cout<<"|    |\n";
 
-	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
-	else cout<<"|    ";
+	if(b.columns[4].size()==1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
+	else cout<<"| // ";
 	cout<<"|() T";
 	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
-	else cout<<"|    |";
+	else cout<<"| // |\n";
 
 	if(b.columns[4].size()>1) cout<<"| "<<b.columns[4].getBottom().getValue()<<b.columns[4].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
 	cout<<"| 'C ";
 	if(b.columns[5].size()>1) cout<<"| "<<b.columns[5].getBottom().getValue()<<b.columns[5].getBottom().getSuit()<<" |\n";
-	else cout<<"|    |";
+	else cout<<"|    |\n";
 
-	cout<<"6----7----8----+";
+	cout<<"6----7----8----+\n";
 
 	if(b.columns[6].size()>1) cout<<"| "<<b.columns[6].getBottom().getValue()<<b.columns[6].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
@@ -252,7 +280,7 @@ void drawBoard(Board b){
 	if(b.columns[8].size()>1) cout<<"| "<<b.columns[8].getTop().getValue()<<b.columns[8].getTop().getSuit()<<" |\n";
 	else cout<<"|    |\n";
 
-	cout<<"+----+----+----+";
+	cout<<"+----+----+----+\n";
 }
 
 void reportWinner(int winner){
@@ -420,6 +448,7 @@ int realPlayer::chooseLocation()
 
 
 void realPlayer::actionsLoop(Board b){
+	drawBoard(b);
 	cout<<"It's your turn.\n";
 	int choice=displayMenu();
 	int dest=0;
@@ -441,9 +470,9 @@ void realPlayer::actionsLoop(Board b){
 			break;
 
 		case 2:
-			cout<<"Choose first location.";
+			cout<<"Choose first location.\n";
 			sourceCol=chooseLocation();
-			cout<<"Choose second location.";
+			cout<<"Choose second location.\n";
 			dest=chooseLocation();
 			if(isValidMove(b.columns[sourceCol], b.columns[dest])){
 				place(source,b.columns[dest]);
@@ -583,9 +612,9 @@ int main()
 			}
 		case 2:
 			displayRules();
-			break;
+			system("pause");
+			system("cls");
 		}
-	
-	return 0;
 	}
+	return 0;
 }
