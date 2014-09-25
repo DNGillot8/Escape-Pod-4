@@ -410,7 +410,7 @@ void aiPlayer::actionsLoop(Board &b){
 
 	draw(b.deck);//draw
 	//drawBoard(b);
-	cout<<"Computer player drew a card. He has"<<hand.size()<<"cards in hand."<<"\n";
+	cout<<"Computer player drew a card. He has "<<hand.size()<<" cards in hand."<<"\n";
 	delay();
 	//cout<<"Hand:";
 	//showHand();
@@ -529,8 +529,10 @@ int realPlayer::chooseLocation()
 void realPlayer::actionsLoop(Board &b){
 	drawBoard(b);
 	draw(b.deck);
-	b.deck.removeCard(b.deck.getTop());
 	cout<<"It's your turn.\n";
+	cout<<"You drew a "<<b.deck.getTop().name()<<".\n";
+	b.deck.removeCard(b.deck.getTop());
+	
 	int choice=0;
 	int dest=0;
 	int sourceCol=0;
