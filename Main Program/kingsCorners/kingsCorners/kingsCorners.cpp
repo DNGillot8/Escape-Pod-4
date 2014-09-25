@@ -205,13 +205,8 @@ bool isValidMove(Card source, Card dest){
 
 bool isValidMove(Card source, Column dest){
 	if(dest.size()==0){
-		if(source.getValue()==12){
-			return 1;
+		return 1;
 		}
-		else{
-			return 0;
-		}
-	}
 	if ((dest.getTop().getValue()-source.getValue()==1)&&(areDifferentColors(source,dest.getTop()))){
 		return 1; // if source is 1 less than dest and they are not the same suit
 		}
@@ -368,10 +363,10 @@ void Player::place(Card crd, Column &clmn)
 
 void Player::place(Column &clmn1, Column &clmn2)
 {
-	for (int i=0; i<clmn2.size(); i++)
-		clmn1.addCard(clmn2.getCard(i));
+	for (int i=0; i<clmn1.size(); i++)
+		clmn2.addCard(clmn1.getCard(i));
 
-	clmn2.clear();
+	clmn1.clear();
 }
 
 void Player::endTurn()
@@ -386,23 +381,23 @@ void Player::draw(Column deck)
 	deck.removeCard(drawn);
 }
 
-
 class aiPlayer: public Player{
 public:
 	//void takeTurn(); //try and eventually implement this
 	
 	bool validLocation[8];
-	void actionsLoop(Board b);
-	void findValidLocations(Card source, Board b);
+	void actionsLoop(Board &b);
+	void findValidLocations(Card source, Board &b);
 	void clearValidLocations();
 	bool victory();
-	bool takeTurn(Board b);
+	bool takeTurn(Board &b);
 private:
 };
 
-void aiPlayer::actionsLoop(Board b){
+void aiPlayer::actionsLoop(Board &b){
 
 	draw(b.deck);//draw
+	drawBoard(b);
 	cout<<"Computer player drew a card.\n";
 	cout<<"Hand:";
 	showHand();
@@ -446,7 +441,7 @@ void aiPlayer::actionsLoop(Board b){
 	showHand();
 }
 
-void aiPlayer::findValidLocations(Card source, Board b){
+void aiPlayer::findValidLocations(Card source, Board &b){
 	for(int i=0;i<8;i++){
 		cout<<"Initializing location..."<<i<<"\n";
 		validLocation[i]=0;
@@ -469,17 +464,15 @@ bool aiPlayer::victory(){
 	return(hand.size()==0);
 }
 
-bool aiPlayer::takeTurn(Board b){
+bool aiPlayer::takeTurn(Board &b){
 	actionsLoop(b);
 	return(victory());
 }
 
-
-
 class realPlayer: public Player{
 public:
 	//void takeTurn(); //try and eventually implement this
-	void actionsLoop(Board b);
+	void actionsLoop(Board &b);
 	int displayMenu();
 	int chooseFromCardsInHand();
 	int chooseLocation();
@@ -508,7 +501,7 @@ int realPlayer::chooseLocation()
 }
 
 
-void realPlayer::actionsLoop(Board b){
+void realPlayer::actionsLoop(Board &b){
 	drawBoard(b);
 	cout<<"It's your turn.\n";
 	int choice=0;
