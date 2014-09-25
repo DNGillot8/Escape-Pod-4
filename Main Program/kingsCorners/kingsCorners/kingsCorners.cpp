@@ -142,32 +142,7 @@ Suit intToSuit(int intSuit) {
 	}
 }
 
-/*
-class Player {
-public:
-	void showHand();
-	void place(Card crd, Column clmn); // places a card on a column
-	void place(Column clmn1, Column clmn2); // places a column on another column
-private:
-	vector<Card> hand; // we don't really need this
-};
 
-
-void Player::showHand() // start of showHand function
-{
-	for (size_t i=0; i<hand.size(); i++) {
-		cout<< hand.at(i).getValue() << " of " << hand.at(i).getSuit() << endl;
-	}
-}
-
-void Player::place(Card crd, Column clmn) {
-
-}
-
-void Player::place(Column clmn1, Column clmn2) {
-
-}
-*/
 
 
 bool areDifferentColors(Card c1, Card c2){
@@ -291,17 +266,17 @@ void displayRules(){
 
 
 class Player{
-public:
-	Player();
-	void showHand();
-	void place(Card crd, Column clmn); // places a card on a column
-	void place(Column clmn1, Column clmn2); // places column2 on column1
-	void endTurn();//ends player's turn
-	//void spy(player spiedOn);//spy on other players' hands?
-	void draw(Column deck);
-	bool pass; //maybe make this private? Must be initialized to 0 in constructor
-	vector<Card> hand; 
+	public:
+		Player();
+		void showHand();
+		void place(Card crd, Column &clmn); // places a card on a column
+		void place(Column &clmn1, Column &clmn2); // places column2 on column1
+		void endTurn();//ends player's turn
+		//void spy(player spiedOn);//spy on other players' hands?
+		void draw(Column deck);
+		bool pass; //maybe make this private? Must be initialized to 0 in constructor
 	private:
+		vector<Card> hand;
 };
 
 Player::Player() {
@@ -315,17 +290,25 @@ void Player::showHand() // start of showHand function
 		cout<<hand.at(i).getValue()<<" of "<<hand.at(i).getSuit()<<endl;
 }
 
-void Player::place(Card crd, Column clmn)
+void Player::place(Card crd, Column &clmn)
 {
-	clmn.addCard(crd);
+	int i=0;
+	for (i; i<hand.size(); i++)
+	{
+		if ((hand.at(i).getSuit() == crd.getSuit()) && (hand.at(i).getValue() == crd.getValue())) // if a card in the hand == crd
+			break;
+	}
+
+	clmn.addCard(hand.at(i)); // adds card to column from hand
+	hand.erase(hand.begin() + i); // removes element from hand at position i
 }
 
-void Player::place(Column clmn1, Column clmn2)
+void Player::place(Column &clmn1, Column &clmn2)
 {
-	for (int i=0; clmn2.size();i++)
-	{
-		clmn1.addCard(clmn2.getCard(i)); 
-	}
+	for (int i=0; i<clmn2.size(); i++)
+		clmn1.addCard(clmn2.getCard(i));
+
+	clmn2.clear();
 }
 
 void Player::endTurn()
@@ -456,6 +439,17 @@ int mainMenu(){
 	return input;
 }
 
+int turnMenu()
+{
+	int answer;
+	do{
+		cout<<"Would you like to do:\n\n"
+			<<"\t1. Place a card\n\t2. Move a column\n\t3. Show Hand\n\t4. Show Board\n\t5. End Turn\n\n";
+		cin>>answer;
+	}while(answer < 1 || answer > 3); // drops out when answer is between 1 and 3 inclusive
+	return answer;
+}
+
 int gameLoop(){/*   //game loop ideas
 	switch (realPlayers){
 	case 1:
@@ -478,15 +472,8 @@ int gameLoop(){/*   //game loop ideas
 	int victory=0;
 	while(!victory){
 				//player 1 turn
-			int playerChoice;
-			cout << "It is your turn, what would you like to do?" << endl;
-			cout << "1. place card" << endl <<
-					"2. move column" << endl <<
-					"3. show hand" << endl <<
-					"4. show board" << endl <<
-					"5. end turn" << endl;
-			cin>>playerChoice;
-
+		int playerChoice = turnMenu();
+			
 			switch (playerChoice) {
 			case 1:
 					//create and then drawCard() in player class
