@@ -116,7 +116,33 @@ void Player::place(Column clmn1, Column clmn2) {
 
 
 bool areDifferentColors(Card c1, Card c2){
-	return 0;// this needs to be written
+	if (c1.getSuit == clubs && c2.getSuit == diamonds) {
+		return true;
+	}
+	else if (c1.getSuit == clubs && c2.getSuit == hearts) {
+		return true;
+	}
+	else if (c1.getSuit == spades && c2.getSuit == diamonds) {
+		return true;
+	}
+	else if (c1.getSuit == spades && c2.getSuit == hearts) {
+		return true;
+	}
+	else if (c1.getSuit == diamonds && c2.getSuit == clubs) {
+		return true;
+	}
+	else if (c1.getSuit == diamonds && c2.getSuit == spades) {
+		return true;
+	}
+	else if (c1.getSuit == hearts && c2.getSuit == clubs) {
+		return true;
+	}
+	else if (c1.getSuit == hearts && c2.getSuit == spades) {
+		return true;
+	}
+	else {
+		return false;
+	}
 }
 
 bool isValidMove(Card source, Column dest){
@@ -278,6 +304,7 @@ private:
 };
 
 void aiPlayer::actionsLoop(Board b){
+
 	draw(b.deck);//draw
 	cout<<"Computer player drew a card.\n";
 
