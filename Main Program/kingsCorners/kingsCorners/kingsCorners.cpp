@@ -19,35 +19,6 @@ using std::random_shuffle;
 using std::rand;
 using std::srand;
 
-
-class Board{
-public:
-	Board();
-	void deckShuffle();
-	Column columns[8];
-	Column deck;
-};
-
-Board::Board() {
-	Value valueName;
-	Suit suitName;
-	for (int i = 0; i < 4; i++) {
-		for (int j = 0; j < 13; j++) {
-			valueName = j;
-			suitName = i;
-			Card c(valueName, suitName);
-			Board::deck.push_back(c);
-		}
-	}
-	deckShuffle();
-	
-	//take four off the top of the deck and put them at four column spots
-}
-
-void Board::deckShuffle() {
-	random_shuffle(deck.begin(), deck.end());
-}
-
 class Column {
 public:
 	//void checkIfValid(); //make sure alternating colors, might not be needed
@@ -114,7 +85,61 @@ int Column::size() const {
 	return cards.size();
 }
 
+class Board{
+public:
+	Board();
+	void deckShuffle();
+	Value intToValue(int intValue);
+	Suit intToSuit(int intSuit);
+	Column columns[8];
+	Column deck;
+};
 
+Board::Board() {
+	Value valueName;
+	Suit suitName;
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 13; j++) {
+			valueName = intToValue(j);
+			suitName = intToSuit(i);
+			Card c(valueName, suitName);
+			Board::deck.push_back(c);
+		}
+	}
+	deckShuffle();
+	
+	//take four off the top of the deck and put them at four column spots
+}
+
+void Board::deckShuffle() {
+	random_shuffle(deck.begin(), deck.end());
+}
+
+Value intToValue(int intValue) {
+	switch(intValue) {
+	case 0: return ace; break;
+	case 1: return deuce; break;
+	case 2: return trey; break;
+	case 3: return four; break; 
+	case 4: return five; break;
+	case 5: return six; break;
+	case 6: return seven; break;
+	case 7: return eight; break;
+	case 8: return nine; break;
+	case 9: return ten; break;
+	case 10: return jack; break;
+	case 11: return queen; break;
+	case 12: return king; break;
+	}
+}
+
+Suit intToSuit(int intSuit) {
+	switch(intSuit) {
+	case 0: return clubs; break;
+	case 1: return diamonds; break;
+	case 2: return hearts; break;
+	case 3: return spades; break; 
+}
 /*
 class Player {
 public:
