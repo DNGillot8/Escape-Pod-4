@@ -33,7 +33,6 @@ public:
 	void shuffle();
 	int size() const;
 	void clear();
-	vector<Card> getCards() {return cards;};
 private:
 	vector<Card> cards;
 };
@@ -58,7 +57,10 @@ void Column::addCard(Card c) {
 
 //maybe don't need
 void Column::removeCard(Card c) {
-	cards.pop_back();
+	for(int i=0;i<cards.size();i++){
+		if(cards.at(i).name()==c.name())
+			cards.erase(cards.begin()+i);
+	}
 }
 
 //probably don't need
@@ -195,20 +197,32 @@ bool areDifferentColors(Card c1, Card c2){
 }
 
 bool isValidMove(Card source, Card dest){
-	if ((dest.getValue()-source.getValue()==1)&&(areDifferentColors(source,dest))){
+	if (((dest.getValue()-source.getValue()==1))&&(areDifferentColors(source,dest))){
 		return 1; // if source is 1 less than dest and they are not the same color
 	}
 	return 0;
 }
 
 bool isValidMove(Card source, Column dest){
+	if(dest.size()==0){
+		if(source.getValue()==12){
+			return 1;
+		}
+		else{
+			return 0;
+		}
+	}
 	if ((dest.getTop().getValue()-source.getValue()==1)&&(areDifferentColors(source,dest.getTop()))){
 		return 1; // if source is 1 less than dest and they are not the same suit
-	}
+		}
 	return 0;
 }
+	
 
 bool isValidMove(Column source, Column dest){
+	if(dest.size()==0&&source.getTop().getValue()==12){
+		return 1;
+	}
 	return isValidMove(source.getTop(), dest.getBottom());
 }
 
@@ -225,20 +239,6 @@ int playerCount(){
 void drawBoard(Board b){
 	cout<<"1----2----3----+\n";
 
-	if(b.columns[0].size()>1) cout<<"| "<<b.valueToChar(b.columns[0].getBottom().getValue())<<b.suitToChar(b.columns[0].getBottom().getSuit())<<" ";
-	else cout<<"|    ";
-	if(b.columns[1].size()>1) cout<<"| "<<b.valueToChar(b.columns[1].getBottom().getValue())<<b.suitToChar(b.columns[1].getBottom().getSuit())<<" ";
-	else cout<<"|    ";
-	if(b.columns[2].size()>1) cout<<"| "<<b.valueToChar(b.columns[2].getBottom().getValue())<<b.suitToChar(b.columns[2].getBottom().getSuit())<<" |\n";
-	else cout<<"|    |\n";
-
-	if(b.columns[0].size()==1) cout<<"| "<<b.valueToChar(b.columns[0].getTop().getValue())<<b.suitToChar(b.columns[0].getTop().getSuit())<<" ";
-	else cout<<"| // ";
-	if(b.columns[1].size()==1) cout<<"| "<<b.valueToChar(b.columns[1].getTop().getValue())<<b.suitToChar(b.columns[1].getTop().getSuit())<<" ";
-	else cout<<"| // ";
-	if(b.columns[2].size()==1) cout<<"| "<<b.valueToChar(b.columns[2].getTop().getValue())<<b.suitToChar(b.columns[2].getTop().getSuit())<<" |\n";
-	else cout<<"| // |\n";
-
 	if(b.columns[0].size()>1) cout<<"| "<<b.valueToChar(b.columns[0].getTop().getValue())<<b.suitToChar(b.columns[0].getTop().getSuit())<<" ";
 	else cout<<"|    ";
 	if(b.columns[1].size()>1) cout<<"| "<<b.valueToChar(b.columns[1].getTop().getValue())<<b.suitToChar(b.columns[1].getTop().getSuit())<<" ";
@@ -246,47 +246,61 @@ void drawBoard(Board b){
 	if(b.columns[2].size()>1) cout<<"| "<<b.valueToChar(b.columns[2].getTop().getValue())<<b.suitToChar(b.columns[2].getTop().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
+	if(b.columns[0].size()==1) cout<<"| "<<b.valueToChar(b.columns[0].getBottom().getValue())<<b.suitToChar(b.columns[0].getBottom().getSuit())<<" ";
+	else cout<<"| // ";
+	if(b.columns[1].size()==1) cout<<"| "<<b.valueToChar(b.columns[1].getBottom().getValue())<<b.suitToChar(b.columns[1].getBottom().getSuit())<<" ";
+	else cout<<"| // ";
+	if(b.columns[2].size()==1) cout<<"| "<<b.valueToChar(b.columns[2].getBottom().getValue())<<b.suitToChar(b.columns[2].getBottom().getSuit())<<" |\n";
+	else cout<<"| // |\n";
+
+	if(b.columns[0].size()>1) cout<<"| "<<b.valueToChar(b.columns[0].getBottom().getValue())<<b.suitToChar(b.columns[0].getBottom().getSuit())<<" ";
+	else cout<<"|    ";
+	if(b.columns[1].size()>1) cout<<"| "<<b.valueToChar(b.columns[1].getBottom().getValue())<<b.suitToChar(b.columns[1].getBottom().getSuit())<<" ";
+	else cout<<"|    ";
+	if(b.columns[2].size()>1) cout<<"| "<<b.valueToChar(b.columns[2].getBottom().getValue())<<b.suitToChar(b.columns[2].getBottom().getSuit())<<" |\n";
+	else cout<<"|    |\n";
+
 	cout<<"4----+----5----+\n";
 
-	if(b.columns[3].size()>1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.suitToChar(b.columns[3].getBottom().getSuit())<<" ";
+	if(b.columns[3].size()>1) cout<<"| "<<b.valueToChar(b.columns[3].getTop().getValue())<<b.suitToChar(b.columns[3].getTop().getSuit())<<" ";
 	else cout<<"|    ";
-	cout<<"| ]< ";
-	if(b.columns[4].size()>1) cout<<"| "<<b.valueToChar(b.columns[4].getBottom().getValue())<<b.suitToChar(b.columns[4].getBottom().getSuit())<<" |\n";
+	cout<<"|K   ";
+	if(b.columns[4].size()>1) cout<<"| "<<b.valueToChar(b.columns[4].getTop().getValue())<<b.suitToChar(b.columns[4].getTop().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
 	if(b.columns[3].size()==1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.suitToChar(b.columns[3].getBottom().getSuit())<<" ";
 	else cout<<"| // ";
-	cout<<"|() T";
+	cout<<"|O  T";
 	if(b.columns[4].size()==1) cout<<"| "<<b.valueToChar(b.columns[4].getBottom().getValue())<<b.suitToChar(b.columns[4].getBottom().getSuit())<<" |\n";
 	else cout<<"| // |\n";
 
 	if(b.columns[3].size()>1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.suitToChar(b.columns[3].getBottom().getSuit())<<" ";
 	else cout<<"|    ";
-	cout<<"| 'C ";
+	cout<<"|   C";
 	if(b.columns[4].size()>1) cout<<"| "<<b.valueToChar(b.columns[4].getBottom().getValue())<<b.suitToChar(b.columns[4].getBottom().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
 	cout<<"6----7----8----+\n";
-
-	if(b.columns[5].size()>1) cout<<"| "<<b.valueToChar(b.columns[5].getBottom().getValue())<<b.suitToChar(b.columns[5].getBottom().getSuit())<<" ";
-	else cout<<"|    ";
-	if(b.columns[6].size()>1) cout<<"| "<<b.valueToChar(b.columns[6].getBottom().getValue())<<b.suitToChar(b.columns[6].getBottom().getSuit())<<" ";
-	else cout<<"|    ";
-	if(b.columns[7].size()>1) cout<<"| "<<b.valueToChar(b.columns[7].getBottom().getValue())<<b.suitToChar(b.columns[7].getBottom().getSuit())<<" |\n";
-	else cout<<"|    |\n";
-
-	if(b.columns[5].size()==1) cout<<"| "<<b.valueToChar(b.columns[5].getTop().getValue())<<b.suitToChar(b.columns[5].getTop().getSuit())<<" ";
-	else cout<<"| // ";
-	if(b.columns[6].size()==1) cout<<"| "<<b.valueToChar(b.columns[6].getTop().getValue())<<b.suitToChar(b.columns[6].getTop().getSuit())<<" ";
-	else cout<<"| // ";
-	if(b.columns[7].size()==1) cout<<"| "<<b.valueToChar(b.columns[7].getTop().getValue())<<b.suitToChar(b.columns[7].getTop().getSuit())<<" |\n";
-	else cout<<"| // |\n";
 
 	if(b.columns[5].size()>1) cout<<"| "<<b.valueToChar(b.columns[5].getTop().getValue())<<b.suitToChar(b.columns[5].getTop().getSuit())<<" ";
 	else cout<<"|    ";
 	if(b.columns[6].size()>1) cout<<"| "<<b.valueToChar(b.columns[6].getTop().getValue())<<b.suitToChar(b.columns[6].getTop().getSuit())<<" ";
 	else cout<<"|    ";
 	if(b.columns[7].size()>1) cout<<"| "<<b.valueToChar(b.columns[7].getTop().getValue())<<b.suitToChar(b.columns[7].getTop().getSuit())<<" |\n";
+	else cout<<"|    |\n";
+
+	if(b.columns[5].size()==1) cout<<"| "<<b.valueToChar(b.columns[5].getBottom().getValue())<<b.suitToChar(b.columns[5].getBottom().getSuit())<<" ";
+	else cout<<"| // ";
+	if(b.columns[6].size()==1) cout<<"| "<<b.valueToChar(b.columns[6].getBottom().getValue())<<b.suitToChar(b.columns[6].getBottom().getSuit())<<" ";
+	else cout<<"| // ";
+	if(b.columns[7].size()==1) cout<<"| "<<b.valueToChar(b.columns[7].getBottom().getValue())<<b.suitToChar(b.columns[7].getBottom().getSuit())<<" |\n";
+	else cout<<"| // |\n";
+
+	if(b.columns[5].size()>1) cout<<"| "<<b.valueToChar(b.columns[5].getBottom().getValue())<<b.suitToChar(b.columns[5].getBottom().getSuit())<<" ";
+	else cout<<"|    ";
+	if(b.columns[6].size()>1) cout<<"| "<<b.valueToChar(b.columns[6].getBottom().getValue())<<b.suitToChar(b.columns[6].getBottom().getSuit())<<" ";
+	else cout<<"|    ";
+	if(b.columns[7].size()>1) cout<<"| "<<b.valueToChar(b.columns[7].getBottom().getValue())<<b.suitToChar(b.columns[7].getBottom().getSuit())<<" |\n";
 	else cout<<"|    |\n";
 
 	cout<<"+----+----+----+\n\n";
@@ -297,7 +311,8 @@ void reportWinner(int winner){
 }
 
 void displayRules(){
-	cout<<"At the beginning of the game every player is dealt 7 cards.  At the\n"<<
+	cout<<"First, choose how many human and computer players you would like.\n"<<
+		"At the beginning of the game every player is dealt 7 cards.  At the\n"<<
 		"start of every turn, the play must draw a card from the top of the \n"<<
 		"deck.\nThe goal of the game is to play cards from your hand onto one \n"<<
 		"of the columns.  The card played must be next lower in rank and\n"<<
@@ -340,12 +355,15 @@ void Player::place(Card crd, Column &clmn)
 	int i=0;
 	for (i; i<hand.size(); i++)
 	{
-		if ((hand.at(i).getSuit() == crd.getSuit()) && (hand.at(i).getValue() == crd.getValue())) // if a card in the hand == crd
+		if (hand.at(i).name() == crd.name()) // if a card in the hand == crd
 			break;
 	}
 
+	//cout<<"here";
 	clmn.addCard(hand.at(i)); // adds card to column from hand
+	//cout<<"added";
 	hand.erase(hand.begin() + i); // removes element from hand at position i
+	//cout<<"erased";
 }
 
 void Player::place(Column &clmn1, Column &clmn2)
@@ -372,9 +390,11 @@ void Player::draw(Column deck)
 class aiPlayer: public Player{
 public:
 	//void takeTurn(); //try and eventually implement this
+	
 	bool validLocation[8];
 	void actionsLoop(Board b);
 	void findValidLocations(Card source, Board b);
+	void clearValidLocations();
 	bool victory();
 	bool takeTurn(Board b);
 private:
@@ -384,28 +404,38 @@ void aiPlayer::actionsLoop(Board b){
 
 	draw(b.deck);//draw
 	cout<<"Computer player drew a card.\n";
-
+	cout<<"Hand:";
+	showHand();
+	system("pause");
+	clearValidLocations();
 	for(int i=0; i<8; i++){//find valid column moves
-		cout<<"here"<<endl;
-		if (!b.columns[i].getCards().empty()) // checks if the ith column is not empty - its cards vector is empty
-			findValidLocations(b.columns[i].getBottom(),b); // problem here
-		cout<<"here"<<endl;
+		
+		cout<<"finding movable columns..."<<i<<"\n";
+		if(b.columns[i].size()!=0) findValidLocations(b.columns[i].getBottom(),b);
+	}
+	for(int i=0; i<8; i++){
 		for(int j=0;j<8;j++){
 			if(validLocation[j]){
+				cout<<"placing columns...\n\n\n\n\n\n\n"<<j<<"\n";
 				place(b.columns[i],b.columns[j]);
-				cout<<"Computer player moved\n";//<<cardname\n
-				validLocation[j]=0; //  problem here
+				cout<<"Computer player moved column "<<i<<" onto column "<<j<<"\n";//<<cardname\n
+				validLocation[j]=0;
 				i=0;
 				break;
 			}
 		}
 			for(int k=0; k<hand.size(); k++){//find valid card moves
+				cout<<"finding playable cards..."<<k<<"\n";
 				findValidLocations(hand.at(k),b);
 				for(int l=0;l<8;l++){
-					if(validLocation[l]){
-						place(hand[k],b.columns[k]);
+					cout<<"checking valid locations for a "<<hand.at(k).name()<<"..."<<l<<"\n";
+					if(validLocation[k]){
+						cout<<"Computer player played an "<<hand.at(k).name()<<" on column "<<l<<"\n";
+						place(hand[k],b.columns[l]);
 						hand.erase(hand.begin()+k);//what is this error??
-						cout<<"Computer player played a\n";//<<cardname\n
+						drawBoard(b);
+						showHand();
+						system("pause");
 						i=0;
 						k=0;
 						break;
@@ -413,14 +443,25 @@ void aiPlayer::actionsLoop(Board b){
 				}
 			}
 	}
+	showHand();
 }
 
 void aiPlayer::findValidLocations(Card source, Board b){
 	for(int i=0;i<8;i++){
+		cout<<"Initializing location..."<<i<<"\n";
 		validLocation[i]=0;
+		cout<<"Checking location "<<i<<" for a "<<source.name()<<"...\n";
+
 		if(isValidMove(source,b.columns[i])){
+			cout<<"   ...validated\n";
 			validLocation[i]=1;
 		}
+	}
+}
+
+void aiPlayer::clearValidLocations(){
+	for(int i=0;i<8;i++){
+		validLocation[i]=0;
 	}
 }
 
@@ -470,47 +511,61 @@ int realPlayer::chooseLocation()
 void realPlayer::actionsLoop(Board b){
 	drawBoard(b);
 	cout<<"It's your turn.\n";
-	int choice=displayMenu();
+	int choice=0;
 	int dest=0;
 	int sourceCol=0;
 	Card source;
 
 	while(choice!=5){
-
+		choice=displayMenu();
 		switch(choice){
 		case 1:
+			drawBoard(b);
 			source=hand[chooseFromCardsInHand()];//menu
-			dest=chooseLocation()-1;//menu
+			dest=chooseLocation();//menu
 			if(isValidMove(source, b.columns[dest])){
 				place(source,b.columns[dest]);
+				system("cls");
+				drawBoard(b);
 			}
 			else{
+				system("cls");
+				drawBoard(b);
 				cout<<"Sorry, not a valid move.\n";
 			}
 			break;
 
 		case 2:
+			drawBoard(b);
 			cout<<"Choose first location.\n";
-			sourceCol=(chooseLocation()-1);
+			sourceCol=chooseLocation();
 			cout<<"Choose second location.\n";
-			dest=(chooseLocation()-1);
+			dest=chooseLocation();
 			if(isValidMove(b.columns[sourceCol], b.columns[dest])){
-				place(source,b.columns[dest]);
+				place(b.columns[sourceCol],b.columns[dest]);
+				system("cls");
+				drawBoard(b);
 			}
 			else{
+				system("cls");
+				drawBoard(b);
 				cout<<"Sorry, not a valid move.\n";
 			}
 			break;
 
 		case 3:
+			drawBoard(b);
 			showHand();
+			system("pause");
+			system("cls");
+			drawBoard(b);
 			break;
 
 		case 4:
 			drawBoard(b);
 			break;
 		}
-		choice=displayMenu();
+		
 	}
 }
 
@@ -558,61 +613,6 @@ int turnMenu()
 	}while(answer < 1 || answer > 3); // drops out when answer is between 1 and 3 inclusive
 	return answer;
 }
-
-/*int gameLoop(){   //game loop ideas
-	switch (realPlayers){
-	case 1:
-		realPlayer p1;
-		aiPlayer p2, p3, p4;
-		break;
-	case 2:
-		realPlayer p1, p2;
-		aiPlayer p3, p4;
-		break;
-	case 3:
-		realPlayer p1, p2, p3;
-		aiPlayer p4;
-		break;
-	case 4:
-		realPlayer p1, p2, p3, p4;
-		break;
-	}
-
-	int victory=0;
-	while(!victory){
-				//player 1 turn
-		int playerChoice = turnMenu();
-			
-			switch (playerChoice) {
-			case 1:
-					//create and then drawCard() in player class
-			case 2:
-					int card = 0;
-					int location = 0;
-					cout << "enter the card and the place to move it to: card column" << endl;
-					cin>>card;
-					cin>>location;
-					//call place(card,location) in player class
-			case 3:
-					int column1;
-					int column2;
-					cout << "enter the column's location and the columns new location, column column" << endl;
-					cin>>column1;
-					cin>>column2;
-					//call moveColumn(column1, column2) in player class
-			case 4:
-					//call showhand() function in player class
-			case 5:
-					//not sure how to flash the board
-			case 6:
-					//break
-	}
-	return victory; //eventually, return winner's name
-	
-	}
-	
-}*/
-
 
 int main()
 {
