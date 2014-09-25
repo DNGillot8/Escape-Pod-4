@@ -103,7 +103,7 @@ Board::Board() {
 			valueName = intToValue(j);
 			suitName = intToSuit(i);
 			Card c(valueName, suitName);
-			Board::deck.addCard(c);
+			deck.addCard(c);
 		}
 	}
 	deckShuffle();
@@ -567,6 +567,9 @@ int turnMenu()
 int main()
 {
 	srand(time(0));
+	Board b;
+	realPlayer human; //constructors?
+	aiPlayer ai;
 
 	int mode=0;
 	while(mode!=3){
@@ -574,7 +577,10 @@ int main()
 		system("cls");
 		switch (mode){
 		case 1:
-			
+			while(true){
+				human.actionsLoop(b);
+				ai.actionsLoop(b);
+			}
 		case 2:
 			displayRules();
 			break;
