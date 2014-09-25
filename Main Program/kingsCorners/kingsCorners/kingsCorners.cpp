@@ -390,8 +390,18 @@ public:
 	//void takeTurn(); //try and eventually implement this
 	void actionsLoop();
 	int displayMenu();
+	int chooseFromCardsInHand();
 private:
 };
+
+int realPlayer::chooseFromCardsInHand()
+{
+	int chosenCard = 0;
+	showHand();
+	cout << "pick a card from the ones in your hand, 1-"<< hand.size() << endl;
+	cin >> chosenCard;
+	return chosenCard-1;
+}
 
 void realPlayer::actionsLoop(){
 	cout<<"It's your turn.\n";
@@ -400,7 +410,7 @@ void realPlayer::actionsLoop(){
 
 		switch(choice){
 		case 1:
-			Card source=chooseFromCardsInHand();//menu
+			Card source=hand[chooseFromCardsInHand()];//menu
 			Card dest=chooseLocation();//menu
 			if(isValidMove(source, dest)){
 		case 2:
