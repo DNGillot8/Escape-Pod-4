@@ -171,14 +171,14 @@ void Player::place(Column clmn1, Column clmn2) {
 
 
 bool areDifferentColors(Card c1, Card c2){
-	if (c1.getSuit == clubs && c2.getSuit == diamonds) {return true;}
-	else if (c1.getSuit == clubs && c2.getSuit == hearts) {return true;}
-	else if (c1.getSuit == spades && c2.getSuit == diamonds) {return true;}
-	else if (c1.getSuit == spades && c2.getSuit == hearts) {return true;}
-	else if (c1.getSuit == diamonds && c2.getSuit == clubs) {return true;}
-	else if (c1.getSuit == diamonds && c2.getSuit == spades) {return true;}
-	else if (c1.getSuit == hearts && c2.getSuit == clubs) {return true;}
-	else if (c1.getSuit == hearts && c2.getSuit == spades) {return true;}
+	if (c1.getSuit() == clubs && c2.getSuit() == diamonds) {return true;}
+	else if (c1.getSuit() == clubs && c2.getSuit() == hearts) {return true;}
+	else if (c1.getSuit() == spades && c2.getSuit() == diamonds) {return true;}
+	else if (c1.getSuit() == spades && c2.getSuit() == hearts) {return true;}
+	else if (c1.getSuit() == diamonds && c2.getSuit() == clubs) {return true;}
+	else if (c1.getSuit() == diamonds && c2.getSuit() == spades) {return true;}
+	else if (c1.getSuit() == hearts && c2.getSuit() == clubs) {return true;}
+	else if (c1.getSuit() == hearts && c2.getSuit() == spades) {return true;}
 	else {return false;}
 }
 
@@ -394,7 +394,7 @@ void aiPlayer::findValidLocations(Card source, Board b){
 }
 
 bool aiPlayer::victory(){
-	return(hand.size==0);
+	return(hand.size()==0);
 }
 
 bool aiPlayer::takeTurn(Board b){

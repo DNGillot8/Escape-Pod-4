@@ -1,49 +1,10 @@
-﻿Build started 9/24/2014 10:27:02 PM.
+﻿Build started 9/24/2014 10:32:03 PM.
      1>Project "C:\Users\UmbleJA1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Card.cpp kingsCorners.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt kingsCorners.cpp
          kingsCorners.cpp
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(174): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(174): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(174): error C2446: '==' : no conversion from 'int' to 'Suit (__thiscall Card::* )(void)'
-                 There are no conversions from integral values to pointer-to-member values
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(174): error C2040: '==' : 'Suit (__thiscall Card::* )(void)' differs in levels of indirection from 'int'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(175): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(175): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(175): error C2446: '==' : no conversion from 'int' to 'Suit (__thiscall Card::* )(void)'
-                 There are no conversions from integral values to pointer-to-member values
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(175): error C2040: '==' : 'Suit (__thiscall Card::* )(void)' differs in levels of indirection from 'int'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(176): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(176): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(176): error C2446: '==' : no conversion from 'int' to 'Suit (__thiscall Card::* )(void)'
-                 There are no conversions from integral values to pointer-to-member values
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(176): error C2040: '==' : 'Suit (__thiscall Card::* )(void)' differs in levels of indirection from 'int'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(177): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(177): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(177): error C2446: '==' : no conversion from 'int' to 'Suit (__thiscall Card::* )(void)'
-                 There are no conversions from integral values to pointer-to-member values
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(177): error C2040: '==' : 'Suit (__thiscall Card::* )(void)' differs in levels of indirection from 'int'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(178): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(178): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(179): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(179): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(179): error C2446: '==' : no conversion from 'int' to 'Suit (__thiscall Card::* )(void)'
-                 There are no conversions from integral values to pointer-to-member values
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(179): error C2040: '==' : 'Suit (__thiscall Card::* )(void)' differs in levels of indirection from 'int'
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(180): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(180): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(181): error C2677: binary '==' : no global operator found which takes type 'Suit' (or there is no acceptable conversion)
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(181): error C3867: 'Card::getSuit': function call missing argument list; use '&Card::getSuit' to create a pointer to member
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(181): error C2446: '==' : no conversion from 'int' to 'Suit (__thiscall Card::* )(void)'
-                 There are no conversions from integral values to pointer-to-member values
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(181): error C2040: '==' : 'Suit (__thiscall Card::* )(void)' differs in levels of indirection from 'int'
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(314): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(371): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(397): error C3867: 'std::vector<_Ty>::size': function call missing argument list; use '&std::vector<_Ty>::size' to create a pointer to member
-                 with
-                 [
-                     _Ty=Card
-                 ]
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(417): error C3861: 'chooseFromCardsInHand': identifier not found
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(418): error C3861: 'chooseLocation': identifier not found
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(500): error C2360: initialization of 'location' is skipped by 'case' label
@@ -66,10 +27,8 @@
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(521): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(533): error C2360: initialization of 'victory' is skipped by 'case' label
                  c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(529) : see declaration of 'victory'
-         Card.cpp
-         Generating Code...
      1>Done Building Project "C:\Users\UmbleJA1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:01.41
+Time Elapsed 00:00:00.53
