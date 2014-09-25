@@ -297,8 +297,7 @@ void reportWinner(int winner){
 }
 
 void displayRules(){
-	cout<<"First, choose how many human and computer players you would like.\n"<<
-		"At the beginning of the game every player is dealt 7 cards.  At the\n"<<
+	cout<<"At the beginning of the game every player is dealt 7 cards.  At the\n"<<
 		"start of every turn, the play must draw a card from the top of the \n"<<
 		"deck.\nThe goal of the game is to play cards from your hand onto one \n"<<
 		"of the columns.  The card played must be next lower in rank and\n"<<
@@ -332,7 +331,7 @@ Player::Player() {
 void Player::showHand() // start of showHand function
 {
 	
-	for (int i=0; i<hand.size(); i++) cout<<i<<") "<<hand.at(i).name()<<endl;
+	for (int i=0; i<hand.size(); i++) cout<<i+1<<") "<<hand.at(i).name()<<endl;
 	cout<<endl;
 }
 
