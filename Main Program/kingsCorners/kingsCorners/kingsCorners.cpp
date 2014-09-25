@@ -19,6 +19,11 @@ using std::random_shuffle;
 using std::rand;
 using std::srand;
 
+void delay(){
+	for(int i=0;i<500000000;i++){
+	}
+}
+
 class Column {
 public:
 	//void checkIfValid(); //make sure alternating colors, might not be needed
@@ -46,10 +51,6 @@ Column::Column() {
 	cards = c;
 }
 
-//Column::Column(int suitInt, int valueInt) {
-//	Card c(suitInt, valueInt);
-//
-//}
 
 void Column::addCard(Card c) {
 	cards.push_back(c);
@@ -183,7 +184,6 @@ char Board::suitToChar(Suit s){
 }
 
 
-
 bool areDifferentColors(Card c1, Card c2){
 	if (c1.getSuit() == clubs && c2.getSuit() == diamonds) {return true;}
 	else if (c1.getSuit() == clubs && c2.getSuit() == hearts) {return true;}
@@ -203,16 +203,28 @@ bool isValidMove(Card source, Card dest){
 	return 0;
 }
 
-bool isValidMove(Card source, Column dest){
-	if(dest.size()==0){
+bool isValidMove(Card source, Column dest, bool corner){
+
+	if(dest.size()==0&&corner){
+		if (source.getValue()==12){
 		return 1;
 		}
-	if ((dest.getTop().getValue()-source.getValue()==1)&&(areDifferentColors(source,dest.getTop()))){
+		else{
+			return 0;
+		}
+	}
+	if(dest.size()==0&&!corner){
+		return 1;
+	}
+
+
+	if ((dest.getBottom().getValue()-source.getValue()==1)&&(areDifferentColors(source,dest.getBottom()))){
 		return 1; // if source is 1 less than dest and they are not the same suit
 		}
+	//cout<<"we fell through";
+	//system("pause");
 	return 0;
 }
-	
 
 bool isValidMove(Column source, Column dest){
 	if(dest.size()==0&&source.getTop().getValue()==12){
@@ -397,40 +409,50 @@ private:
 void aiPlayer::actionsLoop(Board &b){
 
 	draw(b.deck);//draw
-	drawBoard(b);
-	cout<<"Computer player drew a card.\n";
-	cout<<"Hand:";
-	showHand();
-	system("pause");
+	//drawBoard(b);
+	cout<<"Computer player drew a card. He has"<<hand.size()<<"cards in hand."<<"\n";
+	delay();
+	//cout<<"Hand:";
+	//showHand();
+	//system("pause");
 	clearValidLocations();
 	for(int i=0; i<8; i++){//find valid column moves
 		
-		cout<<"finding movable columns..."<<i<<"\n";
+		//cout<<"finding movable columns..."<<i<<"\n";
 		if(b.columns[i].size()!=0) findValidLocations(b.columns[i].getBottom(),b);
 	}
 	for(int i=0; i<8; i++){
+		validLocation[i]=0;
 		for(int j=0;j<8;j++){
+			if(b.columns[j].size()==0) validLocation[j]=0;
 			if(validLocation[j]){
-				cout<<"placing columns...\n\n\n\n\n\n\n"<<j<<"\n";
-				place(b.columns[i],b.columns[j]);
-				cout<<"Computer player moved column "<<i<<" onto column "<<j<<"\n";//<<cardname\n
 				validLocation[j]=0;
+				//cout<<"placing columns...\n\n\n\n\n\n\n"<<j<<"\n";
+				place(b.columns[i],b.columns[j]);
+				cout<<"Computer player moved column "<<i+1<<" onto column "<<j+1<<"\n";//<<cardname\n
+				delay();
+				//drawBoard(b);
+				//system("pause");
+				
 				i=0;
 				break;
 			}
 		}
 			for(int k=0; k<hand.size(); k++){//find valid card moves
-				cout<<"finding playable cards..."<<k<<"\n";
+				//cout<<"finding playable cards..."<<k<<"\n";
 				findValidLocations(hand.at(k),b);
 				for(int l=0;l<8;l++){
-					cout<<"checking valid locations for a "<<hand.at(k).name()<<"..."<<l<<"\n";
-					if(validLocation[k]){
-						cout<<"Computer player played an "<<hand.at(k).name()<<" on column "<<l<<"\n";
+					//cout<<"checking valid locations for a "<<hand.at(k).name()<<"..."<<l<<"\n";
+					if(validLocation[l]){
+						validLocation[l]=0;
+						cout<<"Computer player played a "<<hand.at(k).name()<<" on column "<<l+1<<"\n";
+						delay();
 						place(hand[k],b.columns[l]);
-						hand.erase(hand.begin()+k);//what is this error??
-						drawBoard(b);
-						showHand();
-						system("pause");
+						//hand.erase(hand.begin()+k);
+						//drawBoard(b);
+						//system("pause");
+						//showHand();
+						//system("pause");
 						i=0;
 						k=0;
 						break;
@@ -438,17 +460,20 @@ void aiPlayer::actionsLoop(Board &b){
 				}
 			}
 	}
-	showHand();
+	//showHand();
+	delay();
+	system("cls");
 }
 
 void aiPlayer::findValidLocations(Card source, Board &b){
 	for(int i=0;i<8;i++){
-		cout<<"Initializing location..."<<i<<"\n";
+		//cout<<"Initializing location..."<<i<<"\n";
 		validLocation[i]=0;
-		cout<<"Checking location "<<i<<" for a "<<source.name()<<"...\n";
-
-		if(isValidMove(source,b.columns[i])){
-			cout<<"   ...validated\n";
+		//cout<<"Checking location "<<i<<" for a "<<source.name()<<"...\n";
+		bool corner=0;
+		if(i==0||i==2||i==5||i==7) corner=1;
+		if(isValidMove(source,b.columns[i],corner)){
+			//cout<<"   ...validated\n";
 			validLocation[i]=1;
 		}
 	}
@@ -503,10 +528,13 @@ int realPlayer::chooseLocation()
 
 void realPlayer::actionsLoop(Board &b){
 	drawBoard(b);
+	draw(b.deck);
+	b.deck.removeCard(b.deck.getTop());
 	cout<<"It's your turn.\n";
 	int choice=0;
 	int dest=0;
 	int sourceCol=0;
+	bool corner=0;
 	Card source;
 
 	while(choice!=5){
@@ -516,8 +544,14 @@ void realPlayer::actionsLoop(Board &b){
 			drawBoard(b);
 			source=hand[chooseFromCardsInHand()];//menu
 			dest=chooseLocation();//menu
-			if(isValidMove(source, b.columns[dest])){
+			cout<<"got here first";
+			corner=0;
+			if(dest==0||dest==2||dest==5||dest==7) corner=1;
+
+			if(isValidMove(source, b.columns[dest], corner)){
+				cout<<"got here";
 				place(source,b.columns[dest]);
+				cout<<"got here too";
 				system("cls");
 				drawBoard(b);
 			}
@@ -581,6 +615,8 @@ int realPlayer::displayMenu(){
 		return choice;
 }
 
+
+
 int mainMenu(){
 	cout<<"Welcome to KINGS IN CORNERS\nan ESCAPE POD 4 production\n\n";
 
@@ -613,6 +649,7 @@ int main()
 	Board b;
 	realPlayer human; //constructors?
 	aiPlayer ai;
+	string winner;
 
 
 for(int i=0;i<7;++i){
@@ -631,8 +668,15 @@ for(int i=0;i<7;++i){
 		case 1:
 			while(true){
 				human.actionsLoop(b);
+				if(human.hand.size()==0){
+					winner="YOU!";
+				}
 				ai.actionsLoop(b);
+				if(ai.hand.size()==0){
+					winner="YOUR COMPUTER!";
+				cout<<"THE WINNER IS: "<<winner<<"\n";
 			}
+		}
 		case 2:
 			displayRules();
 			system("pause");
