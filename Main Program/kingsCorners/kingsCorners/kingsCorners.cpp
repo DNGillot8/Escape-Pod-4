@@ -39,6 +39,7 @@ public:
 	void shuffle();
 	int size() const;
 	void clear();
+	void display();
 private:
 	vector<Card> cards;
 };
@@ -50,6 +51,12 @@ Column::Column(vector<Card> c) {
 Column::Column() {
 	vector<Card> c;
 	cards = c;
+}
+
+void Column::display()
+{
+	for (int i=0; i<cards.size(); i++)
+		cout<<cards.at(i).getValue()<<" of "<<cards.at(i).getSuit() <<endl;
 }
 
 void Column::addCard(Card c) {
@@ -86,33 +93,160 @@ int Column::size() const {
 	return cards.size();
 }
 
-
-/*
-class Player {
+class Player{
 public:
+	void generateHand();
 	void showHand();
-	void place(Card crd, Column clmn); // places a card on a column
-	void place(Column clmn1, Column clmn2); // places a column on another column
+	void place(Card crd, Column &clmn); // places a card on a column
+	void place(Column &clmn1, Column &clmn2); // places column2 on column1
+	void endTurn();//ends player's turn
+	//void spy(player spiedOn);//spy on other players' hands?
+	void draw(Column deck);
+	bool pass; //maybe make this private? Must be initialized to 0 in constructor 
+	void draw(Card c); // takes card argument for testing
 private:
-	vector<Card> hand; // we don't really need this
+	vector<Card> hand;
 };
-
 
 void Player::showHand() // start of showHand function
 {
-	for (size_t i=0; i<hand.size(); i++) {
-		cout<< hand.at(i).getValue() << " of " << hand.at(i).getSuit() << endl;
+	
+	for (int i=0; i<hand.size(); i++)
+		cout<<hand.at(i).getValue()<<" of "<<hand.at(i).getSuit()<<endl;
+}
+
+void Player::place(Card crd, Column &clmn)
+{
+	int i=0;
+	for (i; i<hand.size(); i++)
+	{
+		if ((hand.at(i).getSuit() == crd.getSuit()) && (hand.at(i).getValue() == crd.getValue())) // if a card in the hand == crd
+			break;
+	}
+
+	clmn.addCard(hand.at(i)); // adds card to column from hand
+	hand.erase(hand.begin() + i); // removes element from hand at position i
+}
+
+void Player::place(Column &clmn1, Column &clmn2)
+{
+	for (int i=0; i<clmn2.size(); i++)
+		clmn1.addCard(clmn2.getCard(i));
+
+	clmn2.clear();
+}
+
+void Player::endTurn()
+{
+	pass = true;
+}
+
+void Player::draw(Column deck)
+{
+	Card drawn = deck.getTop();
+	hand.push_back(drawn);
+	deck.removeCard(drawn);
+}
+
+
+class aiPlayer: public Player{
+public:
+	//void takeTurn(); //try and eventually implement this
+	bool validLocation[8];
+	void actionsLoop(Board b);
+	void findValidLocations(Card source, Board b);
+	bool victory();
+	bool takeTurn(Board b);
+private:
+};
+
+void aiPlayer::actionsLoop(Board b){
+	draw(b.deck);//draw
+	cout<<"Computer player drew a card.\n";
+
+	for(int i=0; i<b.columns.size(); i++){//find valid column moves
+		findValidLocations(b.columns[i].getBottom(),b);
+		for(int j=0;j<8;j++){
+			if(validLocation[j]){
+				place(b.columns[i],b.columns[j]);
+				cout<<"Computer player moved\n";//<<cardname\n
+				validLocation[j]=0;
+				i=0;
+				break;
+			}
+		}
+			for(int k=0; k<hand.size(); k++){//find valid card moves
+				findValidLocations(hand.at(k),b);
+				for(int l=0;l<8;l++){
+					if(validLocation[l]){
+						place(hand[k],b.columns[k]);
+						hand.erase(k);//what is this error??
+						cout<<"Computer player played a\n";//<<cardname\n
+						i=0;
+						k=0;
+						break;
+					}
+				}
+			}
 	}
 }
 
-void Player::place(Card crd, Column clmn) {
-
+void aiPlayer::findValidLocations(Card source, Board b){
+	for(int i=0;i<8;i++){
+		validLocation[i]=0;
+		if(isValidMove(source,b.columns[i])){
+			validLocation[i]=1;
+		}
+	}
 }
 
-void Player::place(Column clmn1, Column clmn2) {
-
+bool aiPlayer::victory(){
+	return(hand.size==0);
 }
-*/
+
+bool aiPlayer::takeTurn(Board b){
+	actionsLoop(b);
+	return(victory());
+}
+
+class realPlayer: public Player{
+public:
+	//void takeTurn(); //try and eventually implement this
+	void actionsLoop();
+	int displayMenu(); // do we need this?
+private:
+};
+
+void realPlayer::actionsLoop(){
+	int choice=displayMenu();
+	while(choice!=3){
+		if(choice==1){
+			Card source=chooseFromCardsInHand();//menu
+			Card dest=chooseLocation();//menu
+			if(isValidMove(source, dest)){
+				
+			}
+		else{
+
+			}
+		}
+	}
+}
+
+int realPlayer::displayMenu(){
+	int choice=0;
+		cout<<"What would you like to do?\n";
+		cout<<"  -1) play a card from your hand\n";
+		cout<<"  -2) move a column\n";
+		cout<<"  -3) pass";
+
+		while(choice<1||choice>3){
+			cin>>choice;
+			if(choice<1||choice>3) cout<<"Sorry, please enter a valid integer in range 1-3";
+		}
+
+		return choice;
+}
 
 
 bool areDifferentColors(Card c1, Card c2){
@@ -218,156 +352,23 @@ void displayRules(){
 	cout<<"PUT RULES HERE\n";
 }
 
-
-
-class Player{
-public:
-	void showHand();
-	void place(Card crd, Column clmn); // places a card on a column
-	void place(Column clmn1, Column clmn2); // places column2 on column1
-	void endTurn();//ends player's turn
-	//void spy(player spiedOn);//spy on other players' hands?
-	void draw(Column deck);
-	bool pass; //maybe make this private? Must be initialized to 0 in constructor
-	vector<Card> hand; 
-	private:
-};
-
-void Player::showHand() // start of showHand function
+int turnMenu()
 {
-	
-	for (int i=0; i<hand.size(); i++)
-		cout<<hand.at(i).getValue()<<" of "<<hand.at(i).getSuit()<<endl;
-}
-
-void Player::place(Card crd, Column clmn)
-{
-	clmn.addCard(crd);
-}
-
-void Player::place(Column clmn1, Column clmn2)
-{
-	for (int i=0; clmn2.size();i++)
-	{
-		clmn1.addCard(clmn2.getCard(i)); 
-	}
-}
-
-void Player::endTurn()
-{
-	pass = true;
-}
-
-void Player::draw(Column deck)
-{
-	Card drawn = deck.getTop();
-	hand.push_back(drawn);
-	deck.removeCard(drawn);
+	int answer;
+	do{
+		cout<<"Would you like to do:\n\n"
+			<<"\t1. Place a card\n\t2. Move a column\n\t3. Show Hand\n\t4. Show Board\n\t5. End Turn\n\n";
+		cin>>answer;
+	}while(answer < 1 || answer > 3); // drops out when answer is between 1 and 3 inclusive
+	return answer;
 }
 
 
-class aiPlayer: public Player{
-public:
-	//void takeTurn(); //try and eventually implement this
-	bool validLocation[8];
-	void actionsLoop(Board b);
-	void findValidLocations(Card source, Board b);
-	bool victory();
-	bool takeTurn(Board b);
-private:
-};
-
-void aiPlayer::actionsLoop(Board b){
-	draw(b.deck);//draw
-	cout<<"Computer player drew a card.\n";
-
-	for(int i=0; i<b.columns.size(); i++){//find valid column moves
-		findValidLocations(b.columns[i].getBottom(),b);
-		for(int j=0;j<8;j++){
-			if(validLocation[j]){
-				place(b.columns[i],b.columns[j]);
-				cout<<"Computer player moved\n";//<<cardname\n
-				validLocation[j]=0;
-				i=0;
-				break;
-			}
-		}
-			for(int k=0; k<hand.size(); k++){//find valid card moves
-				findValidLocations(hand.at(k),b);
-				for(int l=0;l<8;l++){
-					if(validLocation[l]){
-						place(hand[k],b.columns[k]);
-						hand.erase(k);//what is this error??
-						cout<<"Computer player played a\n";//<<cardname\n
-						i=0;
-						k=0;
-						break;
-					}
-				}
-			}
-	}
-}
-
-void aiPlayer::findValidLocations(Card source, Board b){
-	for(int i=0;i<8;i++){
-		validLocation[i]=0;
-		if(isValidMove(source,b.columns[i])){
-			validLocation[i]=1;
-		}
-	}
-}
-
-bool aiPlayer::victory(){
-	return(hand.size==0);
-}
-
-bool aiPlayer::takeTurn(Board b){
-	actionsLoop(b);
-	return(victory());
-}
-
-class realPlayer: public Player{
-public:
-	//void takeTurn(); //try and eventually implement this
-	void actionsLoop();
-	int displayMenu();
-private:
-};
-
-void realPlayer::actionsLoop(){
-	int choice=displayMenu();
-	while(choice!=3){
-		if(choice==1){
-			Card source=chooseFromCardsInHand();//menu
-			Card dest=chooseLocation();//menu
-			if(isValidMove(source, dest)){
-				
-			}
-		else{
-
-			}
-		}
-	}
-}
-
-int realPlayer::displayMenu(){
-	int choice=0;
-		cout<<"What would you like to do?\n";
-		cout<<"  -1) play a card from your hand\n";
-		cout<<"  -2) move a column\n";
-		cout<<"  -3) pass";
-
-		while(choice<1||choice>3){
-			cin>>choice;
-			if(choice<1||choice>3) cout<<"Sorry, please enter a valid integer in range 1-3";
-		}
-
-		return choice;
-}
 
 int main()
 {
 	srand(time(0));
+
 
 	int mode=0;
 	while(mode!=3){
@@ -412,14 +413,8 @@ int gameLoop(){/*   //game loop ideas
 	int victory=0;
 	while(!victory){
 				//player 1 turn
-			int playerChoice;
-			cout << "It is your turn, what would you like to do?" << endl;
-			cout << "1. place card" << endl <<
-					"2. move column" << endl <<
-					"3. show hand" << endl <<
-					"4. show board" << endl <<
-					"5. end turn" << endl;
-			cin>>playerChoice;
+		int playerChoice = turnMenu();
+			
 
 			switch (playerChoice) {
 			case 1:
