@@ -33,6 +33,7 @@ public:
 	void shuffle();
 	int size() const;
 	void clear();
+	vector<Card> getCards() {return cards;};
 private:
 	vector<Card> cards;
 };
@@ -66,11 +67,11 @@ Card Column::getCard(int i) const {
 }
 
 Card Column::getTop() const {
-	return cards.at(cards.size() - 1);
+	return cards.at(0);
 }
 
 Card Column::getBottom() const {
-	return cards.at(0);
+	return cards.at(cards.size() - 1);
 }
 
 void Column::clear() {
@@ -386,12 +387,15 @@ void aiPlayer::actionsLoop(Board b){
 	cout<<"Computer player drew a card.\n";
 
 	for(int i=0; i<8; i++){//find valid column moves
-		findValidLocations(b.columns[i].getBottom(),b);
+		cout<<"here"<<endl;
+		if (!b.columns[i].getCards().empty()) // checks if the ith column is not empty - its cards vector is empty
+			findValidLocations(b.columns[i].getBottom(),b); // problem here
+		cout<<"here"<<endl;
 		for(int j=0;j<8;j++){
 			if(validLocation[j]){
 				place(b.columns[i],b.columns[j]);
 				cout<<"Computer player moved\n";//<<cardname\n
-				validLocation[j]=0;
+				validLocation[j]=0; //  problem here
 				i=0;
 				break;
 			}
