@@ -111,8 +111,8 @@ Board::Board() {
 	//take four off the top of the deck and put them at four column spots
 }
 
-void Board::deckShuffle() {
-	random_shuffle(deck.begin(), deck.end());
+void Board::deckShuffle(){
+	deck.shuffle();
 }
 
 Value intToValue(int intValue) {
@@ -139,7 +139,9 @@ Suit intToSuit(int intSuit) {
 	case 1: return diamonds; break;
 	case 2: return hearts; break;
 	case 3: return spades; break; 
+	}
 }
+
 /*
 class Player {
 public:
@@ -178,6 +180,13 @@ bool areDifferentColors(Card c1, Card c2){
 	else if (c1.getSuit == hearts && c2.getSuit == clubs) {return true;}
 	else if (c1.getSuit == hearts && c2.getSuit == spades) {return true;}
 	else {return false;}
+}
+
+bool isValidMove(Card source, Card dest){
+	if ((dest.getValue()-source.getValue()==1)&&(areDifferentColors(source,dest))){
+		return 1; // if source is 1 less than dest and they are not the same color
+	}
+	return 0;
 }
 
 bool isValidMove(Card source, Column dest){
@@ -348,7 +357,7 @@ void aiPlayer::actionsLoop(Board b){
 	draw(b.deck);//draw
 	cout<<"Computer player drew a card.\n";
 
-	for(int i=0; i<b.columns.size(); i++){//find valid column moves
+	for(int i=0; i<8; i++){//find valid column moves
 		findValidLocations(b.columns[i].getBottom(),b);
 		for(int j=0;j<8;j++){
 			if(validLocation[j]){
@@ -364,7 +373,7 @@ void aiPlayer::actionsLoop(Board b){
 				for(int l=0;l<8;l++){
 					if(validLocation[l]){
 						place(hand[k],b.columns[k]);
-						hand.erase(k);//what is this error??
+						hand.erase(hand.begin()+k);//what is this error??
 						cout<<"Computer player played a\n";//<<cardname\n
 						i=0;
 						k=0;
@@ -432,30 +441,20 @@ int realPlayer::displayMenu(){
 		return choice;
 }
 
-int main()
-{
-	srand(time(0));
+int mainMenu(){
+	cout<<"Welcome to KINGS IN CORNERS\nan ESCAPE POD 4 production\n\n";
 
-	int mode=0;
-	while(mode!=3){
-		mode=mainMenu();
-		system("cls");
-		switch (mode){
-		case 1:
-			int victory=gameLoop();
-			system("cls");
-			reportWinner(victory);
-			break;
-		case 2:
-			displayRules();
-			break;
-		}
-	
-	return 0;
-	}
+	int input=0;
+	do{
+	cout<<"What would you like to do?\n";
+	cout<<"  -1) Start a game\n";
+	cout<<"  -2) Display the rules\n";
+	cout<<"  -3) Quit\n";
+	cin>>input;
+	if(input<1||input>3) cout<<"\nPlease enter a valid value in range 1 through 3";
+	}while(input<1||input>3);
+	return input;
 }
-
-
 
 int gameLoop(){/*   //game loop ideas
 	switch (realPlayers){
@@ -514,4 +513,28 @@ int gameLoop(){/*   //game loop ideas
 	}
 	return victory; //eventually, return winner's name
 	
+	}
+}
+
+int main()
+{
+	srand(time(0));
+
+	int mode=0;
+	while(mode!=3){
+		mode=mainMenu();
+		system("cls");
+		switch (mode){
+		case 1:
+			int victory=gameLoop();
+			system("cls");
+			reportWinner(victory);
+			break;
+		case 2:
+			displayRules();
+			break;
+		}
+	
+	return 0;
+	}
 }
