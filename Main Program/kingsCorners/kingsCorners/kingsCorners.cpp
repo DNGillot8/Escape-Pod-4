@@ -229,8 +229,8 @@ public:
 	//void spy(player spiedOn);//spy on other players' hands?
 	void draw(Column deck);
 	bool pass; //maybe make this private? Must be initialized to 0 in constructor
-private:
 	vector<Card> hand; 
+	private:
 };
 
 void Player::showHand() // start of showHand function
@@ -269,22 +269,62 @@ void Player::draw(Column deck)
 class aiPlayer: public Player{
 public:
 	//void takeTurn(); //try and eventually implement this
-	void actionsLoop();
-	void findValidLocations(Card source);
+	bool validLocation[8];
+	void actionsLoop(Board b);
+	void findValidLocations(Card source, Board b);
+	bool victory();
+	bool takeTurn(Board b);
 private:
 };
 
-void aiPlayer::actionsLoop(){
-	//draw
-	//while there are valid plays
-	
+void aiPlayer::actionsLoop(Board b){
+	draw(b.deck);//draw
+	cout<<"Computer player drew a card.\n";
 
+	for(int i=0; i<b.columns.size(); i++){//find valid column moves
+		findValidLocations(b.columns[i].getBottom(),b);
+		for(int j=0;j<8;j++){
+			if(validLocation[j]){
+				place(b.columns[i],b.columns[j]);
+				cout<<"Computer player moved\n";//<<cardname\n
+				validLocation[j]=0;
+				i=0;
+				break;
+			}
+		}
+			for(int k=0; k<hand.size(); k++){//find valid card moves
+				findValidLocations(hand.at(k),b);
+				for(int l=0;l<8;l++){
+					if(validLocation[l]){
+						place(hand[k],b.columns[k]);
+						hand.erase(k);//what is this error??
+						cout<<"Computer player played a\n";//<<cardname\n
+						i=0;
+						k=0;
+						break;
+					}
+				}
+			}
+	}
 }
 
-void aiPlayer::findValidLocations(Card source){
-	if(isValidMove(source,
+void aiPlayer::findValidLocations(Card source, Board b){
+	for(int i=0;i<8;i++){
+		validLocation[i]=0;
+		if(isValidMove(source,b.columns[i])){
+			validLocation[i]=1;
+		}
+	}
 }
 
+bool aiPlayer::victory(){
+	return(hand.size==0);
+}
+
+bool aiPlayer::takeTurn(Board b){
+	actionsLoop(b);
+	return(victory());
+}
 
 class realPlayer: public Player{
 public:
