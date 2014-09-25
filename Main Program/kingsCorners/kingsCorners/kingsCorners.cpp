@@ -22,15 +22,38 @@ using std::srand;
 
 class Board{
 public:
+	Board();
+	void deckShuffle();
 	Column columns[8];
 	Column deck;
 };
+
+Board::Board() {
+	Value valueName;
+	Suit suitName;
+	for (int i = 0; i < 4; i++) {
+		for (int j = 0; j < 13; j++) {
+			valueName = j;
+			suitName = i;
+			Card c(valueName, suitName);
+			Board::deck.push_back(c);
+		}
+	}
+	deck.deckShuffle();
+	
+	//take four off the top of the deck and put them at four column spots
+}
+
+void Board::deckShuffle() {
+	random_shuffle(deck.begin(), deck.end());
+}
 
 class Column {
 public:
 	//void checkIfValid(); //make sure alternating colors, might not be needed
 	Column(vector<Card> c);
 	Column();
+	//Column(int suitInt, int valueInt);
 	void addCard(Card c);
 	void removeCard(Card c);
 	Card getTop() const; //returns the top card of the column
@@ -51,6 +74,11 @@ Column::Column() {
 	vector<Card> c;
 	cards = c;
 }
+
+//Column::Column(int suitInt, int valueInt) {
+//	Card c(suitInt, valueInt);
+//
+//}
 
 void Column::addCard(Card c) {
 	cards.push_back(c);
