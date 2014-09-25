@@ -39,7 +39,7 @@ Board::Board() {
 			Board::deck.push_back(c);
 		}
 	}
-	deck.deckShuffle();
+	deckShuffle();
 	
 	//take four off the top of the deck and put them at four column spots
 }
@@ -144,33 +144,15 @@ void Player::place(Column clmn1, Column clmn2) {
 
 
 bool areDifferentColors(Card c1, Card c2){
-	if (c1.getSuit == clubs && c2.getSuit == diamonds) {
-		return true;
-	}
-	else if (c1.getSuit == clubs && c2.getSuit == hearts) {
-		return true;
-	}
-	else if (c1.getSuit == spades && c2.getSuit == diamonds) {
-		return true;
-	}
-	else if (c1.getSuit == spades && c2.getSuit == hearts) {
-		return true;
-	}
-	else if (c1.getSuit == diamonds && c2.getSuit == clubs) {
-		return true;
-	}
-	else if (c1.getSuit == diamonds && c2.getSuit == spades) {
-		return true;
-	}
-	else if (c1.getSuit == hearts && c2.getSuit == clubs) {
-		return true;
-	}
-	else if (c1.getSuit == hearts && c2.getSuit == spades) {
-		return true;
-	}
-	else {
-		return false;
-	}
+	if (c1.getSuit == clubs && c2.getSuit == diamonds) {return true;}
+	else if (c1.getSuit == clubs && c2.getSuit == hearts) {return true;}
+	else if (c1.getSuit == spades && c2.getSuit == diamonds) {return true;}
+	else if (c1.getSuit == spades && c2.getSuit == hearts) {return true;}
+	else if (c1.getSuit == diamonds && c2.getSuit == clubs) {return true;}
+	else if (c1.getSuit == diamonds && c2.getSuit == spades) {return true;}
+	else if (c1.getSuit == hearts && c2.getSuit == clubs) {return true;}
+	else if (c1.getSuit == hearts && c2.getSuit == spades) {return true;}
+	else {return false;}
 }
 
 bool isValidMove(Card source, Column dest){
@@ -276,6 +258,7 @@ void displayRules(){
 
 class Player{
 public:
+	Player();
 	void showHand();
 	void place(Card crd, Column clmn); // places a card on a column
 	void place(Column clmn1, Column clmn2); // places column2 on column1
@@ -286,6 +269,10 @@ public:
 	vector<Card> hand; 
 	private:
 };
+
+Player::Player() {
+	pass = false;
+}
 
 void Player::showHand() // start of showHand function
 {
