@@ -411,19 +411,24 @@ private:
 };
 
 void realPlayer::actionsLoop(){
+	cout<<"It's your turn.\n";
 	int choice=displayMenu();
-	while(choice!=3){
-		if(choice==1){
+	while(choice!=5){
+
+		switch(choice){
+		case 1:
 			Card source=chooseFromCardsInHand();//menu
 			Card dest=chooseLocation();//menu
 			if(isValidMove(source, dest)){
-				
-			}
-		else{
+		case 2:
+		case 3:
+		case 4:
+		case 5:
 
-			}
 		}
+		choice=displayMenu();
 	}
+}
 }
 
 int realPlayer::displayMenu(){
@@ -431,11 +436,13 @@ int realPlayer::displayMenu(){
 		cout<<"What would you like to do?\n";
 		cout<<"  -1) play a card from your hand\n";
 		cout<<"  -2) move a column\n";
-		cout<<"  -3) pass";
+		cout<<"  -3) look at your hand\n";
+		cout<<"  -4) look at the board\n";
+		cout<<"  -5) pass";
 
-		while(choice<1||choice>3){
+		while(choice<1||choice>5){
 			cin>>choice;
-			if(choice<1||choice>3) cout<<"Sorry, please enter a valid integer in range 1-3";
+			if(choice<1||choice>5) cout<<"Sorry, please enter a valid integer in range 1-5";
 		}
 
 		return choice;
@@ -473,7 +480,7 @@ int gameLoop(){/*   //game loop ideas
 	case 4:
 		realPlayer p1, p2, p3, p4;
 		break;
-	}*/
+	}
 
 	int victory=0;
 	while(!victory){
@@ -514,7 +521,9 @@ int gameLoop(){/*   //game loop ideas
 	return victory; //eventually, return winner's name
 	
 	}
+	*/
 }
+
 
 int main()
 {
