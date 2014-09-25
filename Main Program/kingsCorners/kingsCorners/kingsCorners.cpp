@@ -19,6 +19,10 @@ using std::random_shuffle;
 using std::rand;
 using std::srand;
 
+
+bool areDifferentColors(Card c1, Card c2);
+
+
 class Column {
 public:
 	//void checkIfValid(); //make sure alternating colors, might not be needed
@@ -140,6 +144,8 @@ Suit intToSuit(int intSuit) {
 	case 2: return hearts; break;
 	case 3: return spades; break; 
 }
+
+
 /*
 class Player {
 public:
@@ -168,7 +174,8 @@ void Player::place(Column clmn1, Column clmn2) {
 */
 
 
-bool areDifferentColors(Card c1, Card c2){
+
+bool areDifferentColors(Card c1, Card c2) {
 	if (c1.getSuit == clubs && c2.getSuit == diamonds) {return true;}
 	else if (c1.getSuit == clubs && c2.getSuit == hearts) {return true;}
 	else if (c1.getSuit == spades && c2.getSuit == diamonds) {return true;}
