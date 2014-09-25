@@ -110,7 +110,15 @@ Board::Board() {
 	}
 	deckShuffle();
 	
-	//take four off the top of the deck and put them at four column spots
+	//take four off the top of the deck and put them at the four adjacent columns, not corners
+	columns[2].addCard(deck.getTop());
+	deck.removeCard(deck.getTop());
+	columns[4].addCard(deck.getTop());
+	deck.removeCard(deck.getTop());
+	columns[5].addCard(deck.getTop());
+	deck.removeCard(deck.getTop());
+	columns[7].addCard(deck.getTop());
+	deck.removeCard(deck.getTop());
 }
 
 void Board::deckShuffle(){
