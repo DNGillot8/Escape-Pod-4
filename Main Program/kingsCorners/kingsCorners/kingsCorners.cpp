@@ -216,11 +216,11 @@ int playerCount(){
 void drawBoard(Board b){
 	cout<<"1----2----3----+\n";
 
-	if(b.columns[1].size()>1) cout<<"| "<<b.columns[1].getBottom().getValue()<<b.columns[1].getBottom().getSuit()<<" ";
+	if(b.columns[1].size()>1) cout<<"| "<<b.valueToChar(b.columns[1].getBottom().getValue())<<b.suitToChar(b.columns[1].getBottom().getSuit())<<" ";
 	else cout<<"|    ";
-	if(b.columns[2].size()>1) cout<<"| "<<b.columns[2].getBottom().getValue()<<b.columns[2].getBottom().getSuit()<<" ";
+	if(b.columns[2].size()>1) cout<<"| "<<b.valueToChar(b.columns[2].getBottom().getValue())<<b.columns[2].getBottom().getSuit()<<" ";
 	else cout<<"|    ";
-	if(b.columns[3].size()>1) cout<<"| "<<b.columns[3].getBottom().getValue()<<b.columns[3].getBottom().getSuit()<<" |\n";
+	if(b.columns[3].size()>1) cout<<"| "<<b.valueToChar(b.columns[3].getBottom().getValue())<<b.columns[3].getBottom().getSuit()<<" |\n";
 	else cout<<"|    |\n";
 
 	if(b.columns[1].size()==1) cout<<"| "<<b.columns[1].getTop().getValue()<<b.columns[1].getTop().getSuit()<<" ";
@@ -502,7 +502,8 @@ int realPlayer::displayMenu(){
 		cout<<"  -2) move a column\n";
 		cout<<"  -3) look at your hand\n";
 		cout<<"  -4) look at the board\n";
-		cout<<"  -5) pass";
+		cout<<"  -5) pass\n";
+		cout<<">>";
 
 		while(choice<1||choice>5){
 			cin>>choice;

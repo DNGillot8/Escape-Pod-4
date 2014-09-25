@@ -1,4 +1,4 @@
-﻿Build started 9/25/2014 1:34:16 AM.
+﻿Build started 9/25/2014 10:10:22 AM.
      1>Project "C:\Users\UmbleJA1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt kingsCorners.cpp
@@ -6,7 +6,7 @@
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(317): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(324): warning C4018: '<' : signed/unsigned mismatch
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(382): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(598): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(599): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(136): warning C4715: 'Board::intToValue' : not all control paths return a value
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(145): warning C4715: 'Board::intToSuit' : not all control paths return a value
      1>c:\users\umbleja1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(163): warning C4715: 'Board::valueToChar' : not all control paths return a value
@@ -20,4 +20,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.36
+Time Elapsed 00:00:01.48
