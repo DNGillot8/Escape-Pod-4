@@ -103,7 +103,7 @@ Board::Board() {
 			valueName = intToValue(j);
 			suitName = intToSuit(i);
 			Card c(valueName, suitName);
-			Board::deck.push_back(c);
+			Board::deck.addCard(c);
 		}
 	}
 	deckShuffle();
