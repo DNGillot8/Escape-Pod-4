@@ -298,7 +298,7 @@ void reportWinner(int winner){
 
 void displayRules(){
 	cout<<"At the beginning of the game every player is dealt 7 cards.  At the\n"<<
-		"start of every turn, the player must draw a card from the top of the \n"<<
+		"start of every turn, the play must draw a card from the top of the \n"<<
 		"deck.\nThe goal of the game is to play cards from your hand onto one \n"<<
 		"of the columns.  The card played must be next lower in rank and\n"<<
 		"opposite in color to the current top card.  You can play any card onto \n"<<
