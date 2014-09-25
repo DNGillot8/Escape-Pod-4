@@ -386,39 +386,40 @@ void aiPlayer::actionsLoop(Board b){
 	cout<<"Computer player drew a card.\n";
 
 	for(int i=0; i<8; i++){//find valid column moves
-		cout<<"here"<<endl;
-		if (!b.columns[i].getCards().empty()) // checks if the ith column is not empty - its cards vector is empty
-			findValidLocations(b.columns[i].getBottom(),b); // problem here
-		cout<<"here"<<endl;
-		for(int j=0;j<8;j++){
-			if(validLocation[j]){
-				place(b.columns[i],b.columns[j]);
-				cout<<"Computer player moved\n";//<<cardname\n
-				validLocation[j]=0; //  problem here
-				i=0;
+		if (!b.columns[i].getCards().empty()){ // checks if the ith column is not empty - its cards vector is empty
+			findValidLocations(b.columns[i].getBottom(),b);
+			for(int j=0;j<8;j++){
+				if(validLocation[j]){
+					place(b.columns[i],b.columns[j]);
+					cout<<"Computer player moved\n";//<<cardname\n
+					validLocation[j]=0;
+					i=0;
+					break;
+				}
+			}
+		}
+	}
+
+	for(int k=0; k<hand.size(); k++){//find valid card moves
+		findValidLocations(hand.at(k),b);
+		for(int l=0;l<8;l++){
+			if(validLocation[l]){
+				place(hand[k],b.columns[k]);
+				hand.erase(hand.begin()+k);//what is this error??
+				cout<<"Computer player played a\n";//<<cardname\n
+				l=0; // l instead of i?
+				k=0;
 				break;
 			}
 		}
-			for(int k=0; k<hand.size(); k++){//find valid card moves
-				findValidLocations(hand.at(k),b);
-				for(int l=0;l<8;l++){
-					if(validLocation[l]){
-						place(hand[k],b.columns[k]);
-						hand.erase(hand.begin()+k);//what is this error??
-						cout<<"Computer player played a\n";//<<cardname\n
-						i=0;
-						k=0;
-						break;
-					}
-				}
-			}
 	}
+	
 }
 
 void aiPlayer::findValidLocations(Card source, Board b){
 	for(int i=0;i<8;i++){
 		validLocation[i]=0;
-		if(isValidMove(source,b.columns[i])){
+		if(!b.columns[i].getCards().empty() && isValidMove(source,b.columns[i])){ // if the ith column in b is not empty, and theres
 			validLocation[i]=1;
 		}
 	}

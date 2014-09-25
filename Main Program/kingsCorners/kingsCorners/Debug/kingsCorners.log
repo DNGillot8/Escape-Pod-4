@@ -1,28 +1,28 @@
-﻿Build started 9/25/2014 2:29:40 PM.
-     1>Project "C:\Users\TONEYWG1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" on node 2 (Build target(s)).
+﻿Build started 9/25/2014 3:35:01 PM.
+     1>Project "C:\Users\GillotND1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" on node 2 (Build target(s)).
      1>InitializeBuildStatus:
-         Creating "Debug\kingsCorners.unsuccessfulbuild" because "AlwaysCreate" was specified.
+         Touching "Debug\kingsCorners.unsuccessfulbuild".
        ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt kingsCorners.cpp
          kingsCorners.cpp
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(334): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(341): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(402): warning C4018: '<' : signed/unsigned mismatch
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(619): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(154): warning C4715: 'Board::intToSuit' : not all control paths return a value
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(172): warning C4715: 'Board::valueToChar' : not all control paths return a value
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(145): warning C4715: 'Board::intToValue' : not all control paths return a value
-     1>c:\users\toneywg1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(181): warning C4715: 'Board::suitToChar' : not all control paths return a value
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(334): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(341): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(403): warning C4018: '<' : signed/unsigned mismatch
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(622): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(145): warning C4715: 'Board::intToValue' : not all control paths return a value
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(172): warning C4715: 'Board::valueToChar' : not all control paths return a value
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(181): warning C4715: 'Board::suitToChar' : not all control paths return a value
+     1>c:\users\gillotnd1\documents\github\escape-pod-4\main program\kingscorners\kingscorners\kingscorners.cpp(154): warning C4715: 'Board::intToSuit' : not all control paths return a value
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\TONEYWG1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\TONEYWG1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\TONEYWG1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.lib" /MACHINE:X86 Debug\Card.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\GillotND1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\GillotND1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\GillotND1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.lib" /MACHINE:X86 Debug\Card.obj
          Debug\kingsCorners.obj
          Debug\stdafx.obj
-         kingsCorners.vcxproj -> C:\Users\TONEYWG1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.exe
+         kingsCorners.vcxproj -> C:\Users\GillotND1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\Debug\kingsCorners.exe
        FinalizeBuildStatus:
          Deleting file "Debug\kingsCorners.unsuccessfulbuild".
          Touching "Debug\kingsCorners.lastbuildstate".
-     1>Done Building Project "C:\Users\TONEYWG1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" (Build target(s)).
+     1>Done Building Project "C:\Users\GillotND1\Documents\GitHub\Escape-Pod-4\Main Program\kingsCorners\kingsCorners\kingsCorners.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:02.15
+Time Elapsed 00:00:04.22
