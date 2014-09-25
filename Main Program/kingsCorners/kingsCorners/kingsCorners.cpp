@@ -407,6 +407,7 @@ public:
 	//void takeTurn(); //try and eventually implement this
 	void actionsLoop();
 	int displayMenu();
+	int chooseFromCardsInHand();
 private:
 };
 
@@ -429,6 +430,15 @@ void realPlayer::actionsLoop(){
 		choice=displayMenu();
 	}
 }
+}
+
+int realPlayer::chooseFromCardsInHand()
+{
+	int chosenCard = 0;
+	showHand();
+	cout << "pick a card from the ones in your hand, 1-"<< hand.size() << endl;
+	cin >> chosenCard;
+	return chosenCard-1;
 }
 
 int realPlayer::displayMenu(){
