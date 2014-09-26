@@ -1,3 +1,12 @@
+/*
+Authors: Wesley Toney, John Umble, Nick Gillot, James Leach
+Course: COMP 220
+Date: 9/25/2014
+Description: This file contains the column class for our implementation
+of the card game  "Kings on the Corners".
+*/
+
+//init
 #include <iostream>
 #include "Card.h"
 #include <string>
@@ -17,12 +26,11 @@ using std::random_shuffle;
 using std::rand;
 using std::srand;
 
+//the Column class- contains numerous card-based functions in a convenient wrapper around a vector
 class Column {
 public:
-	//void checkIfValid(); //make sure alternating colors, might not be needed
 	Column(vector<Card> c);
 	Column();
-	//Column(int suitInt, int valueInt);
 	void addCard(Card c);
 	void removeCard(Card c);
 	Card getTop() const; //returns the top card of the column

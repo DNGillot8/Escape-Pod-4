@@ -370,7 +370,7 @@ void aiPlayer::actionsLoop(Board &b){
 			if(validLocation[j]){
 				validLocation[j]=0;
 				place(b.columns[i],b.columns[j]); //Place a column
-				cout<<"Computer player moved column "<<i+1<<" onto column "<<j+1<<"\n";
+				cout<<"Computer player moved column "<<i+1<<" onto column "<<j+1<<".\n";
 				delay();
 				i=0;
 				break;
@@ -381,7 +381,7 @@ void aiPlayer::actionsLoop(Board &b){
 				for(int l=0;l<8;l++){
 					if(validLocation[l]){
 						validLocation[l]=0;
-						cout<<"Computer player played a "<<hand.at(k).name()<<" on column "<<l+1<<"\n";
+						cout<<"Computer player played a "<<hand.at(k).name()<<" on column "<<l+1<<".\n";
 						delay();
 						place(hand[k],b.columns[l]);//Play a valid card
 						i=0;//Restart loop to ensure thoroughness
@@ -392,6 +392,9 @@ void aiPlayer::actionsLoop(Board &b){
 				}
 			}
 	}
+	delay();
+	cout<<"Computer player passed the turn.\n";
+	delay();
 	delay();
 	system("cls");
 }
@@ -591,13 +594,14 @@ int turnMenu()
 //Main driver function.
 int main()
 {
+	//init
 	srand(time(0));
 	Board b;
-	realPlayer human; //constructors?
+	realPlayer human;
 	aiPlayer ai;
 	string winner;
 
-
+	//draw initial hands
 for(int i=0;i<7;++i){
 	human.draw(b.deck);
 	b.deck.removeCard(b.deck.getTop());
@@ -611,7 +615,7 @@ for(int i=0;i<7;++i){
 		system("cls");
 		
 		switch (mode){
-		case 1:
+		case 1://run game
 			while(true){
 				human.actionsLoop(b);
 				if(human.hand.size()==0){
@@ -629,7 +633,7 @@ for(int i=0;i<7;++i){
 
 
 		case 2:
-			displayRules();
+			displayRules();//show rules
 			system("pause");
 			system("cls");
 		}
