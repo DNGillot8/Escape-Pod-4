@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <ctime>
 #include <windows.h>
+#include "Column.h"
 
 using std::cout;
 using std::endl;
@@ -22,71 +23,6 @@ using std::srand;
 
 void delay(){
 	Sleep(1500);
-}
-
-class Column {
-public:
-	//void checkIfValid(); //make sure alternating colors, might not be needed
-	Column(vector<Card> c);
-	Column();
-	//Column(int suitInt, int valueInt);
-	void addCard(Card c);
-	void removeCard(Card c);
-	Card getTop() const; //returns the top card of the column
-	Card getBottom() const; //returns the bottom card of the column
-	Card getCard(int i) const; //returns the card at index i
-	void shuffle();
-	int size() const;
-	void clear();
-private:
-	vector<Card> cards;
-};
-
-Column::Column(vector<Card> c) {
-	cards = c;
-}
-
-Column::Column() {
-	vector<Card> c;
-	cards = c;
-}
-
-
-void Column::addCard(Card c) {
-	cards.push_back(c);
-}
-
-//maybe don't need
-void Column::removeCard(Card c) {
-	for(int i=0;i<cards.size();i++){
-		if(cards.at(i).name()==c.name())
-			cards.erase(cards.begin()+i);
-	}
-}
-
-//probably don't need
-Card Column::getCard(int i) const {
-	return cards.at(i);
-}
-
-Card Column::getTop() const {
-	return cards.at(0);
-}
-
-Card Column::getBottom() const {
-	return cards.at(cards.size() - 1);
-}
-
-void Column::clear() {
-	cards.clear();
-}
-
-void Column::shuffle() {
-	random_shuffle(cards.begin(), cards.end());
-}
-
-int Column::size() const {
-	return cards.size();
 }
 
 class Board{
