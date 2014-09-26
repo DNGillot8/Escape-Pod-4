@@ -233,7 +233,6 @@ bool isValidMove(Column source, Column dest){
 	return isValidMove(source.getTop(), dest.getBottom());
 }
 
-
 int playerCount(){
 	int count=0;
 	do{
@@ -330,8 +329,6 @@ void displayRules(){
 		"all the cards in their hand.\n";
 }
 
-
-
 class Player{
 	public:
 		Player();
@@ -408,17 +405,12 @@ private:
 
 void aiPlayer::actionsLoop(Board &b){
 
-	draw(b.deck);//draw
-	//drawBoard(b);
+	draw(b.deck);
+	b.deck.removeCard(b.deck.getTop());
 	cout<<"Computer player drew a card. He has "<<hand.size()<<" cards in hand."<<"\n";
 	delay();
-	//cout<<"Hand:";
-	//showHand();
-	//system("pause");
 	clearValidLocations();
-	for(int i=0; i<8; i++){//find valid column moves
-		
-		//cout<<"finding movable columns..."<<i<<"\n";
+	for(int i=0; i<8; i++){
 		if(b.columns[i].size()!=0) findValidLocations(b.columns[i].getBottom(),b);
 	}
 	for(int i=0; i<8; i++){
@@ -427,53 +419,39 @@ void aiPlayer::actionsLoop(Board &b){
 			if(b.columns[j].size()==0) validLocation[j]=0;
 			if(validLocation[j]){
 				validLocation[j]=0;
-				//cout<<"placing columns...\n\n\n\n\n\n\n"<<j<<"\n";
 				place(b.columns[i],b.columns[j]);
-				cout<<"Computer player moved column "<<i+1<<" onto column "<<j+1<<"\n";//<<cardname\n
+				cout<<"Computer player moved column "<<i+1<<" onto column "<<j+1<<"\n";
 				delay();
-				//drawBoard(b);
-				//system("pause");
-				
 				i=0;
 				break;
 			}
 		}
-			for(int k=0; k<hand.size(); k++){//find valid card moves
-				//cout<<"finding playable cards..."<<k<<"\n";
+			for(int k=0; k<hand.size(); k++){
 				findValidLocations(hand.at(k),b);
 				for(int l=0;l<8;l++){
-					//cout<<"checking valid locations for a "<<hand.at(k).name()<<"..."<<l<<"\n";
 					if(validLocation[l]){
 						validLocation[l]=0;
 						cout<<"Computer player played a "<<hand.at(k).name()<<" on column "<<l+1<<"\n";
 						delay();
 						place(hand[k],b.columns[l]);
-						//hand.erase(hand.begin()+k);
-						//drawBoard(b);
-						//system("pause");
-						//showHand();
-						//system("pause");
 						i=0;
 						k=0;
+						l=0;
 						break;
 					}
 				}
 			}
 	}
-	//showHand();
 	delay();
 	system("cls");
 }
 
 void aiPlayer::findValidLocations(Card source, Board &b){
 	for(int i=0;i<8;i++){
-		//cout<<"Initializing location..."<<i<<"\n";
 		validLocation[i]=0;
-		//cout<<"Checking location "<<i<<" for a "<<source.name()<<"...\n";
 		bool corner=0;
 		if(i==0||i==2||i==5||i==7) corner=1;
 		if(isValidMove(source,b.columns[i],corner)){
-			//cout<<"   ...validated\n";
 			validLocation[i]=1;
 		}
 	}
@@ -508,8 +486,11 @@ int realPlayer::chooseFromCardsInHand()
 {
 	int chosenCard = 0;
 	showHand();
-	cout << "pick a card from the ones in your hand, 1-"<< hand.size() << endl;
+	do{
+	cout << "Pick a card from your hand (1-"<< hand.size() << ")\n>>";
 	cin >> chosenCard;
+	if(chosenCard<1||chosenCard>hand.size()) cout<<"Sorry, invalid choice.\nMake sure you choose an integer between 1 and "<<hand.size()<<".\n";
+	}while(chosenCard<1||chosenCard>hand.size());
 	return chosenCard-1;
 }
 
@@ -546,14 +527,14 @@ void realPlayer::actionsLoop(Board &b){
 			drawBoard(b);
 			source=hand[chooseFromCardsInHand()];//menu
 			dest=chooseLocation();//menu
-			cout<<"got here first";
+			//cout<<"got here first";
 			corner=0;
 			if(dest==0||dest==2||dest==5||dest==7) corner=1;
 
 			if(isValidMove(source, b.columns[dest], corner)){
-				cout<<"got here";
+				//cout<<"got here";
 				place(source,b.columns[dest]);
-				cout<<"got here too";
+				//cout<<"got here too";
 				system("cls");
 				drawBoard(b);
 			}
@@ -566,10 +547,16 @@ void realPlayer::actionsLoop(Board &b){
 
 		case 2:
 			drawBoard(b);
+			do{
 			cout<<"Choose first location.\n";
 			sourceCol=chooseLocation();
 			cout<<"Choose second location.\n";
 			dest=chooseLocation();
+			if(sourceCol==dest) cout<<"Please choose locations that are not identical.\n";
+			if(b.columns[dest].size()==0) cout<<"Don't just shuffle columns around, you goof!\n";
+			if(b.columns[sourceCol].size()==0) cout<<"You can't move an empty column, silly goose.\n";
+			}while((sourceCol==dest)&&(b.columns[dest].size()==0)&&(b.columns[sourceCol].size()==0));
+
 			if(isValidMove(b.columns[sourceCol], b.columns[dest])){
 				place(b.columns[sourceCol],b.columns[dest]);
 				system("cls");
@@ -627,7 +614,7 @@ int mainMenu(){
 	cout<<"What would you like to do?\n";
 	cout<<"  -1) Start a game\n";
 	cout<<"  -2) Display the rules\n";
-	cout<<"  -3) Quit\n";
+	cout<<"  -3) Quit\n>>";
 	cin>>input;
 	if(input<1||input>3) cout<<"\nPlease enter a valid value in range 1 through 3";
 	}while(input<1||input>3);
