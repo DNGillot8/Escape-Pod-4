@@ -1,6 +1,12 @@
-// kingsCorners.cpp : Defines the entry point for the console application.
-//
+/*
+Authors: Wesley Toney, John Umble, Nick Gillot, James Leach
+Course: COMP 220
+Date: 9/25/2014
+Description: The main driver file for Project 2, this file simulates the card game 
+"Kings on the Corners".
+*/
 
+//initialization
 #include <iostream>
 #include "Card.h"
 #include <string>
@@ -21,10 +27,15 @@ using std::random_shuffle;
 using std::rand;
 using std::srand;
 
+
+//waits 1.5 seconds
 void delay(){
 	Sleep(1500);
 }
 
+
+//Board class definition. Contains capacity for shuffling and value/suit conversion.
+//Also contains the board columns and deck.
 class Board{
 public:
 	Board();
@@ -37,6 +48,7 @@ public:
 	Column deck;
 };
 
+//Constructor, builds the deck
 Board::Board() {
 	Value valueName;
 	Suit suitName;
@@ -61,10 +73,12 @@ Board::Board() {
 	deck.removeCard(deck.getTop());
 }
 
+//Shuffles the deck
 void Board::deckShuffle(){
 	deck.shuffle();
 }
 
+//Returns corresponding value to an integer between 0 and 12
 Value Board::intToValue(int intValue) {
 	switch(intValue) {
 	case 0: return ace; break;
@@ -83,6 +97,7 @@ Value Board::intToValue(int intValue) {
 	}
 }
 
+//Returns corresponding Suit from an integer in range 0-4
 Suit Board::intToSuit(int intSuit) {
 	switch(intSuit) {
 	case 0: return clubs; break;
@@ -92,6 +107,7 @@ Suit Board::intToSuit(int intSuit) {
 	}
 }
 
+//Returns corresponding char from a Value 
 char Board::valueToChar(Value v){
 	switch(v){
 		case ace: return 'A'; break;
@@ -110,6 +126,7 @@ char Board::valueToChar(Value v){
 	}
 }
 
+//Returns corresponding char from a Suit 
 char Board::suitToChar(Suit s){
 	switch(s){
 		case clubs: return 'C'; break;
@@ -120,6 +137,8 @@ char Board::suitToChar(Suit s){
 }
 
 
+
+//Returns true if card arguments are two different
 bool areDifferentColors(Card c1, Card c2){
 	if (c1.getSuit() == clubs && c2.getSuit() == diamonds) {return true;}
 	else if (c1.getSuit() == clubs && c2.getSuit() == hearts) {return true;}
@@ -132,6 +151,7 @@ bool areDifferentColors(Card c1, Card c2){
 	else {return false;}
 }
 
+//Checks if moving one card onto another is a valid move.
 bool isValidMove(Card source, Card dest){
 	if (((dest.getValue()-source.getValue()==1))&&(areDifferentColors(source,dest))){
 		return 1; // if source is 1 less than dest and they are not the same color
@@ -139,6 +159,7 @@ bool isValidMove(Card source, Card dest){
 	return 0;
 }
 
+//Checks if moving one card onto a column is a valid move.
 bool isValidMove(Card source, Column dest, bool corner){
 
 	if(dest.size()==0&&corner){
@@ -162,6 +183,7 @@ bool isValidMove(Card source, Column dest, bool corner){
 	return 0;
 }
 
+//Checks if moving one column onto another is a valid move.
 bool isValidMove(Column source, Column dest){
 	if(dest.size()==0&&source.getTop().getValue()==12){
 		return 1;
@@ -169,15 +191,7 @@ bool isValidMove(Column source, Column dest){
 	return isValidMove(source.getTop(), dest.getBottom());
 }
 
-int playerCount(){
-	int count=0;
-	do{
-		cout<<"How many human players want to play (1-4)?\n";
-		cin>>count;
-	} while (count<=1&&count>=4);
-	return count;
-}
-
+//Draws the current board state to the screen.
 void drawBoard(Board b){
 	cout<<"1----2----3----+\n";
 
@@ -248,23 +262,21 @@ void drawBoard(Board b){
 	cout<<"+----+----+----+\n\n";
 }
 
-void reportWinner(int winner){
-	cout<<"Player"<<winner<<"is the winner!!!";
-}
-
+//Displays the rules.
 void displayRules(){
-	cout<<"First, choose how many human and computer players you would like.\n"<<
-		"At the beginning of the game every player is dealt 7 cards.  At the\n"<<
-		"start of every turn, the play must draw a card from the top of the \n"<<
-		"deck.\nThe goal of the game is to play cards from your hand onto one \n"<<
-		"of the columns.  The card played must be next lower in rank and\n"<<
-		"opposite in color to the current top card.  You can play any card onto \n"<<
-		"empty columns around the straight sides of the deck and only kings\n"<<
-		"on the corners of the deck.  You may also stack columns.  If cannot \n"<<
-		"make any more moves, end your turn.  The game ends when someone plays \n"<<
-		"all the cards in their hand.\n";
+	cout<<"\nAt the beginning of the game every player is dealt 7 cards. At the\n"<<
+		"start of every turn, the player must draw a card from the top of the "<<
+		"deck.\n\nThe goal of the game is to play cards from your hand onto one \n"<<
+		"of the columns. The card played must be next lower in rank and\n"<<
+		"opposite in color to the current card.  You can play any card onto \n"<<
+		"empty columns around the straight sides of the deck, but only kings may\n"<<
+		"be played to begin the corners of the deck. You may also stack columns.  \nIf you cannot "<<
+		"make any more moves, end your turn. \n\nThe game ends when someone plays "<<
+		"all the cards in their hand.\n\n";
 }
 
+
+//Player class. Contains hands, card movement functionality
 class Player{
 	public:
 		Player();
@@ -272,17 +284,18 @@ class Player{
 		void place(Card crd, Column &clmn); // places a card on a column
 		void place(Column &clmn1, Column &clmn2); // places column2 on column1
 		void endTurn();//ends player's turn
-		//void spy(player spiedOn);//spy on other players' hands?
 		void draw(Column deck);
 		bool pass; //maybe make this private? Must be initialized to 0 in constructor
 		vector<Card> hand;
 	private:
 };
 
+//Default constructor.
 Player::Player() {
 	pass = false;
 }
 
+//Outputs the contents of the player's hand to the screen.
 void Player::showHand() // start of showHand function
 {
 	
@@ -290,6 +303,7 @@ void Player::showHand() // start of showHand function
 	cout<<endl;
 }
 
+//Places a card from the player's hand in a column.
 void Player::place(Card crd, Column &clmn)
 {
 	int i=0;
@@ -299,13 +313,11 @@ void Player::place(Card crd, Column &clmn)
 			break;
 	}
 
-	//cout<<"here";
-	clmn.addCard(hand.at(i)); // adds card to column from hand
-	//cout<<"added";
-	hand.erase(hand.begin() + i); // removes element from hand at position i
-	//cout<<"erased";
+	clmn.addCard(hand.at(i)); 
+	hand.erase(hand.begin() + i);
 }
 
+//Moves one column onto another.
 void Player::place(Column &clmn1, Column &clmn2)
 {
 	for (int i=0; i<clmn1.size(); i++)
@@ -314,11 +326,13 @@ void Player::place(Column &clmn1, Column &clmn2)
 	clmn1.clear();
 }
 
+//Ends the player's turn (deprecated).
 void Player::endTurn()
 {
 	pass = true;
 }
 
+//Draws a card.
 void Player::draw(Column deck)
 {
 	Card drawn = deck.getTop();
@@ -326,10 +340,9 @@ void Player::draw(Column deck)
 	deck.removeCard(drawn);
 }
 
+//aiPlayer class. Contains logic for the AI player.
 class aiPlayer: public Player{
 public:
-	//void takeTurn(); //try and eventually implement this
-	
 	bool validLocation[8];
 	void actionsLoop(Board &b);
 	void findValidLocations(Card source, Board &b);
@@ -339,23 +352,24 @@ public:
 private:
 };
 
+//THe actual AI.
 void aiPlayer::actionsLoop(Board &b){
 
-	draw(b.deck);
+	draw(b.deck);//draw card
 	b.deck.removeCard(b.deck.getTop());
 	cout<<"Computer player drew a card. He has "<<hand.size()<<" cards in hand."<<"\n";
 	delay();
-	clearValidLocations();
+	clearValidLocations();//initialize valid location array
 	for(int i=0; i<8; i++){
-		if(b.columns[i].size()!=0) findValidLocations(b.columns[i].getBottom(),b);
+		if(b.columns[i].size()!=0) findValidLocations(b.columns[i].getBottom(),b);//find valid destinations for columns
 	}
 	for(int i=0; i<8; i++){
 		validLocation[i]=0;
 		for(int j=0;j<8;j++){
-			if(b.columns[j].size()==0) validLocation[j]=0;
+			if(b.columns[j].size()==0) validLocation[j]=0;//Don't put a column onto itself
 			if(validLocation[j]){
 				validLocation[j]=0;
-				place(b.columns[i],b.columns[j]);
+				place(b.columns[i],b.columns[j]); //Place a column
 				cout<<"Computer player moved column "<<i+1<<" onto column "<<j+1<<"\n";
 				delay();
 				i=0;
@@ -363,14 +377,14 @@ void aiPlayer::actionsLoop(Board &b){
 			}
 		}
 			for(int k=0; k<hand.size(); k++){
-				findValidLocations(hand.at(k),b);
+				findValidLocations(hand.at(k),b);//find valid destinations for cards
 				for(int l=0;l<8;l++){
 					if(validLocation[l]){
 						validLocation[l]=0;
 						cout<<"Computer player played a "<<hand.at(k).name()<<" on column "<<l+1<<"\n";
 						delay();
-						place(hand[k],b.columns[l]);
-						i=0;
+						place(hand[k],b.columns[l]);//Play a valid card
+						i=0;//Restart loop to ensure thoroughness
 						k=0;
 						l=0;
 						break;
@@ -382,6 +396,7 @@ void aiPlayer::actionsLoop(Board &b){
 	system("cls");
 }
 
+//Finds valid locations for a card to be placed onto the board.
 void aiPlayer::findValidLocations(Card source, Board &b){
 	for(int i=0;i<8;i++){
 		validLocation[i]=0;
@@ -393,24 +408,29 @@ void aiPlayer::findValidLocations(Card source, Board &b){
 	}
 }
 
+//Resets list of valid locations.
 void aiPlayer::clearValidLocations(){
 	for(int i=0;i<8;i++){
 		validLocation[i]=0;
 	}
 }
 
+//Returns 1 if hand size = 0 (deprecated)
 bool aiPlayer::victory(){
 	return(hand.size()==0);
 }
 
+//Takes turn (deprecated)
 bool aiPlayer::takeTurn(Board &b){
 	actionsLoop(b);
 	return(victory());
 }
 
+
+
+//realPlayer class. Contains input functionality.
 class realPlayer: public Player{
 public:
-	//void takeTurn(); //try and eventually implement this
 	void actionsLoop(Board &b);
 	int displayMenu();
 	int chooseFromCardsInHand();
@@ -418,6 +438,7 @@ public:
 private:
 };
 
+//Allows choosing of one card from your hand.
 int realPlayer::chooseFromCardsInHand()
 {
 	int chosenCard = 0;
@@ -430,6 +451,7 @@ int realPlayer::chooseFromCardsInHand()
 	return chosenCard-1;
 }
 
+//Allows choosing of one column on the board.
 int realPlayer::chooseLocation()
 {
        int location = 0;
@@ -442,35 +464,32 @@ int realPlayer::chooseLocation()
        return location;
 }
 
-
+//Contains input functionality.
 void realPlayer::actionsLoop(Board &b){
-	drawBoard(b);
-	draw(b.deck);
+	drawBoard(b); //draws the board
+	draw(b.deck); //draws a card 
 	cout<<"It's your turn.\n";
 	cout<<"You drew a "<<b.deck.getTop().name()<<".\n";
 	b.deck.removeCard(b.deck.getTop());
 	
-	int choice=0;
+	int choice=0; //variable initialization
 	int dest=0;
 	int sourceCol=0;
 	bool corner=0;
 	Card source;
 
-	while(choice!=5){
+	while(choice!=5){//main input loop
 		choice=displayMenu();
 		switch(choice){
-		case 1:
+		case 1://Places a card from your hand onto the board
 			drawBoard(b);
-			source=hand[chooseFromCardsInHand()];//menu
-			dest=chooseLocation();//menu
-			//cout<<"got here first";
+			source=hand[chooseFromCardsInHand()];
+			dest=chooseLocation();
 			corner=0;
 			if(dest==0||dest==2||dest==5||dest==7) corner=1;
 
 			if(isValidMove(source, b.columns[dest], corner)){
-				//cout<<"got here";
 				place(source,b.columns[dest]);
-				//cout<<"got here too";
 				system("cls");
 				drawBoard(b);
 			}
@@ -481,7 +500,7 @@ void realPlayer::actionsLoop(Board &b){
 			}
 			break;
 
-		case 2:
+		case 2://Moves one column onto another column.
 			drawBoard(b);
 			do{
 			cout<<"Choose first location.\n";
@@ -505,7 +524,7 @@ void realPlayer::actionsLoop(Board &b){
 			}
 			break;
 
-		case 3:
+		case 3://Shows your hand.
 			drawBoard(b);
 			showHand();
 			system("pause");
@@ -513,7 +532,7 @@ void realPlayer::actionsLoop(Board &b){
 			drawBoard(b);
 			break;
 
-		case 4:
+		case 4://Draws the board.
 			drawBoard(b);
 			break;
 		}
@@ -521,7 +540,7 @@ void realPlayer::actionsLoop(Board &b){
 	}
 }
 
-
+//Outputs turn menu.
 int realPlayer::displayMenu(){
 	int choice=0;
 		cout<<"What would you like to do?\n";
@@ -541,7 +560,7 @@ int realPlayer::displayMenu(){
 }
 
 
-
+//Outputs main menu.
 int mainMenu(){
 	cout<<"Welcome to KINGS IN CORNERS\nan ESCAPE POD 4 production\n\n";
 
@@ -557,6 +576,7 @@ int mainMenu(){
 	return input;
 }
 
+//Outputs turn menu (deprecated)
 int turnMenu()
 {
 	int answer;
@@ -568,6 +588,7 @@ int turnMenu()
 	return answer;
 }
 
+//Main driver function.
 int main()
 {
 	srand(time(0));
@@ -595,13 +616,18 @@ for(int i=0;i<7;++i){
 				human.actionsLoop(b);
 				if(human.hand.size()==0){
 					winner="YOU!";
+					break;
 				}
 				ai.actionsLoop(b);
 				if(ai.hand.size()==0){
 					winner="YOUR COMPUTER!";
-				cout<<"THE WINNER IS: "<<winner<<"\n";
+					break;
+				}	
 			}
-		}
+			cout<<"THE WINNER IS: "<<winner<<"\n";
+			break;
+
+
 		case 2:
 			displayRules();
 			system("pause");
