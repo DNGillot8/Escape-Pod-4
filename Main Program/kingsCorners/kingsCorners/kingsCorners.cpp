@@ -8,6 +8,7 @@
 #include <algorithm>
 #include <cstdlib>
 #include <ctime>
+#include <windows.h>
 
 using std::cout;
 using std::endl;
@@ -20,8 +21,7 @@ using std::rand;
 using std::srand;
 
 void delay(){
-	for(int i=0;i<500000000;i++){
-	}
+	Sleep(1500);
 }
 
 class Column {
